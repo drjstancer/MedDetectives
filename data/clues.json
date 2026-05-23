@@ -1,0 +1,40 @@
+{
+  "challengeClues": [
+    {
+      "clueId": "CLUE-001",
+      "title": "Energy Drink",
+      "category": "Nutrition",
+      "description": "Half-empty energy drink discovered near backpack.",
+      "importanceLevel": "medium",
+      "possibleConnections": [
+        "Dehydration",
+        "Sleep disruption",
+        "Increased exertion"
+      ]
+    },
+    {
+      "clueId": "CLUE-002",
+      "title": "Insulin Pen",
+      "category": "Supplies",
+      "description": "Insulin pen located in side pocket of backpack.",
+      "importanceLevel": "high",
+      "possibleConnections": [
+        "Glucose imbalance",
+        "Missed meals",
+        "Energy crash"
+      ]
+    },
+    {
+      "clueId": "CLUE-003",
+      "title": "Tournament Schedule",
+      "category": "Activity",
+      "description": "Participant played multiple consecutive games with minimal breaks.",
+      "importanceLevel": "medium",
+      "possibleConnections": [
+        "Fatigue",
+        "Heat stress",
+        "Physical overexertion"
+      ]
+    }
+  ]
+}

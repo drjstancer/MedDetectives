@@ -1,0 +1,31 @@
+.live-feed-panel,
+.discovery-board,
+.qr-prompt-panel {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 2rem;
+}
+
+.live-feed-panel ul,
+.discovery-board ul {
+  margin-top: 1rem;
+  padding-left: 1.5rem;
+}
+
+.discovery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.discovery-card {
+  background: rgba(255,255,255,0.03);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.qr-prompt-panel h2 {
+  margin-bottom: 1rem;
+}

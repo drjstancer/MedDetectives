@@ -1,0 +1,10 @@
+{
+  "runtimeConfig": {
+    "defaultScenario": "case-001",
+    "maximumEscalationLevel": 3,
+    "startingAttempts": 5,
+    "audioEnabled": true,
+    "hybridMode": true,
+    "physicalInteractionRequired": true
+  }
+}

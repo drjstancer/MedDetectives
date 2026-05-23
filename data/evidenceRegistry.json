@@ -1,0 +1,22 @@
+{
+  "discoveryRegistry": [
+    {
+      "discoveryId": "DISC-001",
+      "title": "Energy Drink",
+      "description": "Half-empty container discovered beneath the table.",
+      "location": "Evidence Table"
+    },
+    {
+      "discoveryId": "DISC-002",
+      "title": "Printed Notes",
+      "description": "Handwritten observations hidden inside backpack.",
+      "location": "Backpack Station"
+    },
+    {
+      "discoveryId": "DISC-003",
+      "title": "Timeline Cards",
+      "description": "Sequence cards pinned to investigation wall.",
+      "location": "Investigation Wall"
+    }
+  ]
+}

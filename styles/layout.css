@@ -1,0 +1,40 @@
+.layout-grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.two-column-layout {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.center-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.panel-stack {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.status-panel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.status-item {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.status-item span {
+  display: block;
+  color: #9eb0ca;
+  margin-bottom: 0.5rem;
+}

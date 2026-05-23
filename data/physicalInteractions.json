@@ -1,0 +1,28 @@
+{
+  "physicalInteractions": [
+    {
+      "interactionId": "PI-001",
+      "type": "qr-reveal",
+      "physicalZone": "Evidence Table",
+      "requiredObject": "Energy Drink",
+      "digitalReward": "unlock-clue-sequence",
+      "instructions": "Scan the QR marker hidden beneath the label."
+    },
+    {
+      "interactionId": "PI-002",
+      "type": "timeline-puzzle",
+      "physicalZone": "Investigation Wall",
+      "requiredObject": "Event Timeline Cards",
+      "digitalReward": "unlock-stage-interpretation",
+      "instructions": "Arrange the sequence cards in chronological order."
+    },
+    {
+      "interactionId": "PI-003",
+      "type": "artifact-review",
+      "physicalZone": "Backpack Station",
+      "requiredObject": "Printed Notes",
+      "digitalReward": "unlock-response-stage",
+      "instructions": "Identify the most important observation hidden in the notes."
+    }
+  ]
+}

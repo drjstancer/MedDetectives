@@ -1,0 +1,137 @@
+{
+  "scenarioProfile": {
+    "recordId": "SCN-2026-001",
+    "givenName": "Jordan",
+    "familyName": "Carter",
+    "displayName": "Jordan Carter",
+    "yearsOld": 17,
+    "birthDate": "2008-03-14",
+    "identity": "Male",
+    "background": "Black/African American",
+    "heightMetric": 182,
+    "weightMetric": 74,
+    "groupType": "O+",
+    "avatar": "/assets/images/patient-photo.jpg",
+    "organization": "Rock Bridge High School",
+    "level": "11th Grade",
+    "activities": [
+      "Basketball",
+      "Track"
+    ],
+    "contactPerson": {
+      "name": "Monica Carter",
+      "role": "Mother",
+      "phone": "(573) 555-0197"
+    }
+  },
+  "primarySituation": {
+    "headline": "Collapsed during basketball tournament",
+    "observations": [
+      "Dizziness",
+      "Nausea",
+      "Sweating",
+      "Confusion",
+      "Abdominal pain",
+      "Weakness"
+    ],
+    "elapsedMinutes": 18
+  },
+  "eventOverview": {
+    "venue": "Mizzou Summer Basketball Invitational",
+    "arrivalCondition": "Participant found on sideline bench, sweating heavily and confused",
+    "observerNotes": [
+      "Participant had been active for nearly two hours",
+      "Friends reported stomach pain before collapse",
+      "Participant skipped lunch",
+      "Participant consumed multiple energy drinks"
+    ],
+    "environmentNotes": [
+      "Outdoor temperature 96F",
+      "High humidity",
+      "Minimal shade",
+      "Limited hydration breaks"
+    ]
+  },
+  "statusReadings": {
+    "pulse": 128,
+    "pressure": "92/58",
+    "breathing": 24,
+    "temperatureF": 101.2,
+    "oxygenLevel": 97,
+    "discomfortScale": 6,
+    "glucosePending": true
+  },
+  "assessmentNotes": {
+    "appearance": [
+      "Sweating heavily",
+      "Fatigued",
+      "Mildly disoriented",
+      "Slow responses"
+    ],
+    "movement": [
+      "Weak standing balance",
+      "Mild tremor"
+    ],
+    "focus": [
+      "Delayed response time",
+      "Confused about current location"
+    ],
+    "comfort": [
+      "Diffuse abdominal discomfort"
+    ]
+  },
+  "backgroundHistory": {
+    "knownFactors": [
+      "Type 1 Diabetes",
+      "Exercise-induced asthma"
+    ],
+    "previousEvents": [
+      {
+        "year": 2024,
+        "summary": "Low glucose episode during sports practice"
+      }
+    ],
+    "familyFactors": [
+      "Mother has hypertension",
+      "Grandfather had diabetes",
+      "No known sudden cardiac events"
+    ]
+  },
+  "inventoryItems": [
+    {
+      "object": "Backpack",
+      "important": true
+    },
+    {
+      "object": "Insulin pen",
+      "important": true
+    },
+    {
+      "object": "Energy drink",
+      "important": true
+    },
+    {
+      "object": "Tournament wristband",
+      "important": false
+    },
+    {
+      "object": "Fast-food receipt",
+      "important": true
+    }
+  ],
+  "scenarioLogic": {
+    "mainOutcome": "Severe hypoglycemia with dehydration and heat exhaustion",
+    "complication": "Electrolyte imbalance",
+    "misleadingPaths": [
+      "Appendicitis",
+      "Stimulant overuse",
+      "Respiratory distress"
+    ],
+    "criticalInsights": [
+      "Recognizing skipped meals",
+      "Prioritizing glucose assessment",
+      "Connecting heat and dehydration",
+      "Separating misleading clues from core issue"
+    ]
+  }
+}

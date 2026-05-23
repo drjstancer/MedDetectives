@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MedDetectives</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="screen">
+    <section class="hero-panel">
+      <p class="status-tag">MizzouMed Scenario Console</p>
+      <h1>MED DETECTIVES</h1>
+      <p class="subtitle">
+        Collaborative Clinical Reasoning Challenge
+      </p>
+
+      <div class="mission-card">
+        <h2>Scenario Activation</h2>
+        <p>
+          Your response team has been activated for a live challenge sequence.
+          Gather evidence. Interpret clues. Stabilize the situation.
+        </p>
+
+        <form id="activation-form">
+          <label for="teamName">Team Name</label>
+          <input type="text" id="teamName" placeholder="Enter team name" required />
+
+          <label for="accessCode">Activation Code</label>
+          <input type="password" id="accessCode" placeholder="Enter code" required />
+
+          <button type="submit">Begin Scenario</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "fallbackScenes": [
+    {
+      "sceneId": "fallback-interruption",
+      "title": "Temporary Interruption",
+      "message": "The experience is reconnecting. Please remain with your facilitator."
+    },
+    {
+      "sceneId": "fallback-refresh",
+      "title": "Session Restored",
+      "message": "Your previous progress has been restored successfully."
+    }
+  ]
+}

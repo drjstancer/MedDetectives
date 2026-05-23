@@ -1,0 +1,13 @@
+{
+  "availableScenarios": [
+    {
+      "scenarioId": "case-001",
+      "title": "The Tournament Collapse",
+      "difficulty": "introductory",
+      "estimatedDurationMinutes": 45,
+      "folder": "case-001",
+      "startingScene": "activation",
+      "theme": "Clinical reasoning and evidence interpretation"
+    }
+  ]
+}

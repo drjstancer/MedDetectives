@@ -1,0 +1,34 @@
+{
+  "roomZones": [
+    {
+      "zoneId": "ZONE-001",
+      "name": "Evidence Table",
+      "purpose": "Physical clue discovery and artifact analysis",
+      "requiredItems": [
+        "Backpack",
+        "Energy Drink",
+        "Tournament Schedule"
+      ]
+    },
+    {
+      "zoneId": "ZONE-002",
+      "name": "Investigation Wall",
+      "purpose": "Timeline reconstruction and clue organization",
+      "requiredItems": [
+        "Timeline Cards",
+        "Observation Notes",
+        "String Connectors"
+      ]
+    },
+    {
+      "zoneId": "ZONE-003",
+      "name": "Discussion Station",
+      "purpose": "Collaborative reasoning and strategy discussion",
+      "requiredItems": [
+        "Whiteboard",
+        "Markers",
+        "Response Worksheets"
+      ]
+    }
+  ]
+}

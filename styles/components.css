@@ -1,0 +1,63 @@
+.tracker-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 1rem;
+  display: grid;
+  gap: 0.5rem;
+}
+
+.clue-card {
+  background: rgba(255,255,255,0.04);
+  border-radius: 14px;
+  padding: 1.5rem;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+.clue-category {
+  color: #78a6ff;
+  text-transform: uppercase;
+  letter-spacing: 0.08rem;
+  margin-bottom: 0.5rem;
+}
+
+.importance-level {
+  margin-top: 1rem;
+  color: #ffd27a;
+}
+
+.alert-panel {
+  background: rgba(185,58,58,0.14);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 14px;
+  padding: 1.5rem;
+}
+
+.scene-header {
+  margin-bottom: 2rem;
+}
+
+.scene-tag {
+  color: #78a6ff;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.scene-subtitle {
+  color: #c8d2df;
+  margin-top: 1rem;
+}
+
+.action-button {
+  background: #b93a3a;
+  border: none;
+  border-radius: 10px;
+  padding: 1rem 1.5rem;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.action-button:hover {
+  background: #d04b4b;
+}

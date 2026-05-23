@@ -1,0 +1,18 @@
+{
+  "challengeDefinitions": [
+    {
+      "challengeId": "timeline-sequence",
+      "type": "sequence",
+      "title": "Activity Timeline",
+      "prompt": "Arrange the activity events in the correct order.",
+      "reward": "unlock-investigation"
+    },
+    {
+      "challengeId": "clue-interpretation",
+      "type": "analysis",
+      "title": "Clue Connections",
+      "prompt": "Identify the most important observation pattern.",
+      "reward": "unlock-interpretation"
+    }
+  ]
+}

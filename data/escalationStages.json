@@ -1,0 +1,22 @@
+{
+  "escalationStages": [
+    {
+      "level": 1,
+      "title": "Increased Confusion",
+      "description": "Participant responses become slower and less focused.",
+      "triggerAudio": "alert-soft.mp3"
+    },
+    {
+      "level": 2,
+      "title": "Rapid Decline",
+      "description": "Environmental pressure and urgency intensify.",
+      "triggerAudio": "alert-medium.mp3"
+    },
+    {
+      "level": 3,
+      "title": "Critical Window",
+      "description": "The team must immediately finalize a response strategy.",
+      "triggerAudio": "alert-critical.mp3"
+    }
+  ]
+}

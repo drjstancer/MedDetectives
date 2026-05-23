@@ -1,0 +1,19 @@
+{
+  "facilitatorTriggers": [
+    {
+      "triggerId": "TRIGGER-001",
+      "condition": "Participants fail to identify major clue within 10 minutes",
+      "facilitatorAction": "Provide subtle verbal guidance toward evidence table"
+    },
+    {
+      "triggerId": "TRIGGER-002",
+      "condition": "Participants complete timeline sequence",
+      "facilitatorAction": "Release escalation envelope"
+    },
+    {
+      "triggerId": "TRIGGER-003",
+      "condition": "Participants unlock interpretation stage",
+      "facilitatorAction": "Play escalation audio sequence"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "taskDefinitions": [
+    {
+      "taskId": "TASK-001",
+      "title": "Search the Evidence Table",
+      "description": "Locate the most important physical clue."
+    },
+    {
+      "taskId": "TASK-002",
+      "title": "Reconstruct the Timeline",
+      "description": "Arrange the sequence of events correctly."
+    },
+    {
+      "taskId": "TASK-003",
+      "title": "Prepare a Response Strategy",
+      "description": "Develop the strongest explanation for the scenario."
+    }
+  ]
+}

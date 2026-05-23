@@ -1,0 +1,28 @@
+{
+  "challengeFlow": [
+    {
+      "stage": 1,
+      "name": "Activation",
+      "objective": "Enter the experience and prepare for intake.",
+      "status": "active"
+    },
+    {
+      "stage": 2,
+      "name": "Investigation",
+      "objective": "Search for evidence and discuss possible explanations.",
+      "status": "locked"
+    },
+    {
+      "stage": 3,
+      "name": "Interpretation",
+      "objective": "Connect observations and identify the strongest pattern.",
+      "status": "locked"
+    },
+    {
+      "stage": 4,
+      "name": "Response Plan",
+      "objective": "Develop the final response strategy.",
+      "status": "locked"
+    }
+  ]
+}

@@ -16,6 +16,7 @@ import {
 const timerElement = document.getElementById('countdown-timer');
 const clueCounter = document.getElementById('clue-counter');
 const completionPanel = document.getElementById('completion-panel');
+const clueFeed = document.getElementById('participant-clue-feed');
 
 function updateTimer() {
   if (!timerElement) {

@@ -151,6 +151,7 @@ window.addEventListener('visibilitychange', () => {
 
 updateClueCounter();
 updateTimer();
+renderParticipantClues();
 setInterval(updateTimer, 1000);
 
 console.log('investigation', getState());

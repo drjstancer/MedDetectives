@@ -10,40 +10,37 @@ function generateSessionCode() {
 
 export function createFacilitatorSession(scenarioId = 'jordan-carter-case') {
   const sessionCode = generateSessionCode();
-  const startedAt = new Date();
-  const expiresAt = new Date(startedAt.getTime() + SESSION_DURATION_MS);
 
   const state = updateState({
     scenarioId,
     sessionCode,
-    sessionStatus: 'active',
+    sessionStatus: 'ready',
     currentStage: 'Scenario Activation',
     clueRequests: [],
     cluesUsed: 0,
-    sentClues: [],
-    startedAt: startedAt.toISOString(),
-    expiresAt: expiresAt.toISOString()
+    sentClues: []
   });
 
   publish('FACILITATOR_SESSION_CREATED', {
     scenarioId,
-    sessionCode,
-    startedAt: startedAt.toISOString(),
-    expiresAt: expiresAt.toISOString()
+    sessionCode
   });
 
   return state;
 }
 
 export function activateParticipantSession({ teamName, sessionCode }) {
+  const startedAt = new Date();
+  const expiresAt = new Date(startedAt.getTime() + SESSION_DURATION_MS);
+
   const state = updateState({
     groupName: teamName,
     sessionCode,
     sessionStatus: 'active',
     cluesUsed: getState().cluesUsed || 0,
     clueRequests: getState().clueRequests || [],
-    startedAt: getState().startedAt,
-    expiresAt: getState().expiresAt
+    startedAt: startedAt.toISOString(),
+    expiresAt: expiresAt.toISOString()
   });
 
   publish('PARTICIPANT_SESSION_ACTIVATED', {
@@ -59,7 +56,7 @@ export function activateParticipantSession({ teamName, sessionCode }) {
 export function getRemainingMilliseconds() {
   const state = getState();
 
-  if (!state.expiresAt) {
+  if (!state.expiresAt || state.sessionStatus !== 'active') {
     return SESSION_DURATION_MS;
   }
 

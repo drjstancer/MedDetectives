@@ -4,6 +4,9 @@ import {
   sendClue,
   formatRemainingTime
 } from '../engine/sessionRuntime.js';
+import {
+  bindButtonAction
+} from '../engine/uiBindings.js';
 
 const sessionTimer = document.querySelector('.timer');
 const guidancePanels = document.querySelectorAll('.snapshot-card');
@@ -20,15 +23,17 @@ function refreshFacilitatorView() {
 
   if (cluePanel) {
     const requests = state.clueRequests || [];
+    const button = cluePanel.querySelector('button');
 
-    cluePanel.querySelector('button').textContent =
-      requests.length
+    if (button) {
+      button.textContent = requests.length
         ? `Send Clue (${requests.length})`
         : 'Send Clue';
+    }
   }
 }
 
-document.querySelector('.primary-button')?.addEventListener('click', () => {
+bindButtonAction('.primary-button', () => {
   const state = createFacilitatorSession();
 
   alert(`Scenario Activated: ${state.sessionCode}`);
@@ -36,7 +41,7 @@ document.querySelector('.primary-button')?.addEventListener('click', () => {
   refreshFacilitatorView();
 });
 
-document.querySelector('.secondary-button')?.addEventListener('click', () => {
+bindButtonAction('.secondary-button', () => {
   sendClue();
 
   alert('Clue sent to participants.');

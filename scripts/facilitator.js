@@ -1,72 +1,52 @@
 import { getState, resetState } from '../engine/state.js';
-import { increaseEscalation } from '../engine/progression.js';
-import { supabase } from '../engine/supabaseClient.js';
+import {
+  createFacilitatorSession,
+  sendClue,
+  formatRemainingTime
+} from '../engine/sessionRuntime.js';
 
-const sessionView = document.getElementById('session-view');
-const eventsView = document.getElementById('events-view');
-const connectionState = document.getElementById('connection-state');
+const sessionTimer = document.querySelector('.timer');
+const guidancePanels = document.querySelectorAll('.snapshot-card');
 
-const refresh = async () => {
+function refreshFacilitatorView() {
   const state = getState();
-  sessionView.textContent = JSON.stringify(state, null, 2);
 
-  if (!supabase || !state.sessionId) {
-    connectionState.textContent = 'Waiting for active session';
-    return;
+  if (sessionTimer && state.sessionStatus === 'active') {
+    sessionTimer.textContent = formatRemainingTime();
   }
 
-  const s = await supabase
-    .from('sessions')
-    .select('*')
-    .eq('session_id', state.sessionId)
-    .maybeSingle();
+  const cluePanel = Array.from(guidancePanels)
+    .find((panel) => panel.textContent.includes('Clue Requests'));
 
-  const e = await supabase
-    .from('session_events')
-    .select('*')
-    .eq('session_id', state.sessionId)
-    .order('created_at', { ascending: false })
-    .limit(10);
+  if (cluePanel) {
+    const requests = state.clueRequests || [];
 
-  if (s.data) sessionView.textContent = JSON.stringify(s.data, null, 2);
-  eventsView.textContent = JSON.stringify(e.data || [], null, 2);
-  connectionState.textContent = 'Live';
-};
+    cluePanel.querySelector('button').textContent =
+      requests.length
+        ? `Send Clue (${requests.length})`
+        : 'Send Clue';
+  }
+}
 
-let channel = null;
+document.querySelector('.primary-button')?.addEventListener('click', () => {
+  const state = createFacilitatorSession();
 
-const bindRealtime = async () => {
-  const state = getState();
-  if (!supabase || !state.sessionId) return;
+  alert(`Scenario Activated: ${state.sessionCode}`);
 
-  channel = supabase
-    .channel(`facilitator:${state.sessionId}`)
-    .on(
-      'postgres_changes',
-      { event: '*', schema: 'public', table: 'sessions', filter: `session_id=eq.${state.sessionId}` },
-      refresh
-    )
-    .on(
-      'postgres_changes',
-      { event: '*', schema: 'public', table: 'session_events', filter: `session_id=eq.${state.sessionId}` },
-      refresh
-    )
-    .subscribe((status) => {
-      connectionState.textContent = `Realtime ${status}`;
-    });
-};
-
-document.getElementById('refresh-btn')?.addEventListener('click', refresh);
-
-document.getElementById('escalate-btn')?.addEventListener('click', async () => {
-  await increaseEscalation();
-  await refresh();
+  refreshFacilitatorView();
 });
 
-document.getElementById('reset-btn')?.addEventListener('click', async () => {
+document.querySelector('.secondary-button')?.addEventListener('click', () => {
+  sendClue();
+
+  alert('Clue sent to participants.');
+
+  refreshFacilitatorView();
+});
+
+window.addEventListener('beforeunload', () => {
   resetState();
-  await refresh();
 });
 
-await refresh();
-await bindRealtime();
+refreshFacilitatorView();
+setInterval(refreshFacilitatorView, 1000);

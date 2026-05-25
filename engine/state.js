@@ -4,23 +4,42 @@ const defaultState = {
   sessionId: '',
   groupName: '',
   sessionCode: '',
-  currentScene: 'activation',
-  discoveredClues: [],
+
+  currentStage: 'stage-01-activation',
+
+  unlockedStages: ['stage-01-activation'],
+
+  discoveries: [],
+
+  evidenceConnections: [],
+
   completedChallenges: [],
-  unlockedScenes: ['activation'],
+
+  facilitatorGuidanceHistory: [],
+
+  reflectionArtifacts: [],
+
   escalationLevel: 0,
+
   remainingAttempts: 5,
+
   elapsedMinutes: 0,
+
   lastEventAt: null
 };
 
 export function getState() {
   const stored = localStorage.getItem(key);
+
   if (!stored) {
     localStorage.setItem(key, JSON.stringify(defaultState));
     return structuredClone(defaultState);
   }
-  return JSON.parse(stored);
+
+  return {
+    ...structuredClone(defaultState),
+    ...JSON.parse(stored)
+  };
 }
 
 export function updateState(values) {
@@ -29,7 +48,9 @@ export function updateState(values) {
     ...values,
     lastEventAt: new Date().toISOString()
   };
+
   localStorage.setItem(key, JSON.stringify(next));
+
   return next;
 }
 

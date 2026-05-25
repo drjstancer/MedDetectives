@@ -1,1 +1,51 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>MedDetectives</title><link rel="stylesheet" href="style.css"/></head><body><main class="screen"><section class="hero-panel"><p class="status-tag">Hybrid Learning Experience</p><h1>MED DETECTIVES</h1><p class="subtitle">Collaborative Clinical Reasoning Challenge</p><div class="mission-card"><h2>Scenario Activation</h2><form id="activation-form"><label for="teamName">Team Name</label><input id="teamName" required/><label for="sessionCode">Session Code</label><input id="sessionCode" required/><button type="submit">Begin Scenario</button></form></div></section></main><script type="module" src="app.js"></script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MedDetectives</title>
+  <link rel="stylesheet" href="./styles/main.css" />
+</head>
+<body>
+  <main class="portal-layout">
+    <section>
+      <p class="eyebrow">Hybrid Educational Escape Room</p>
+      <h1>MedDetectives</h1>
+
+      <p>
+        Student-led collaborative investigation where reasoning quality determines progress.
+      </p>
+    </section>
+
+    <section class="portal-grid">
+      <article class="portal-card">
+        <p class="eyebrow">Participant Experience</p>
+
+        <h2>Scenario Activation</h2>
+
+        <p>
+          Enter your session code and begin the collaborative investigation.
+        </p>
+
+        <a href="./pages/investigation.html" class="primary-button">
+          Participant Portal
+        </a>
+      </article>
+
+      <article class="portal-card">
+        <p class="eyebrow">Facilitator Experience</p>
+
+        <h2>Facilitator Dashboard</h2>
+
+        <p>
+          Prepare room materials, activate scenarios, and guide participant reasoning.
+        </p>
+
+        <a href="./pages/facilitator.html" class="secondary-button">
+          Facilitator Portal
+        </a>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

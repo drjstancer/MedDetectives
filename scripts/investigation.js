@@ -10,15 +10,14 @@ import { ProgressionMap } from '../engine/progressionMap.js';
 import { getDiscoveryById } from '../engine/discoveryRegistry.js';
 import { validateInvestigationPin } from '../engine/pinValidator.js';
 import { startQrScanner } from '../engine/qrScanner.js';
+import { qrDiscoveryMap } from '../content/qr/qrDiscoveryMap.js';
 import {
   bindButtonAction,
   bindFormSubmission
 } from '../engine/uiBindings.js';
 
 const timerElement = document.getElementById('countdown-timer');
-const clueCounter = document.getElementById('clue-counter');
 const completionPanel = document.getElementById('completion-panel');
-const clueFeed = document.getElementById('participant-clue-feed');
 const discoveryFeed = document.getElementById('discovery-feed');
 const activationCard = document.getElementById('activation-card');
 const activationStatus = document.getElementById('activation-status');
@@ -33,11 +32,21 @@ function renderDiscovery(discovery) {
   const state = getState();
   const discoveries = state.discoveries || [];
 
-  if (!discoveries.includes(discovery.type)) {
-    updateState({
-      discoveries: [...discoveries, discovery.type]
-    });
+  if (discoveries.includes(discovery.id)) {
+    discoveryFeed.innerHTML += `
+      <article class="participant-discovery-card">
+        <span>Duplicate Discovery</span>
+        <h3>Evidence Already Reviewed</h3>
+        <p>Your team has already analyzed this artifact.</p>
+      </article>
+    `;
+
+    return;
   }
+
+  updateState({
+    discoveries: [...discoveries, discovery.id]
+  });
 
   discoveryFeed.innerHTML += `
     <article class="participant-discovery-card">
@@ -69,10 +78,6 @@ function updateTimer() {
 
   timerElement.textContent = formatRemainingTime(remaining);
 
-  if (remaining <= 10 * 60 * 1000) {
-    timerElement.style.color = '#ff9d7a';
-  }
-
   if (remaining <= 0) {
     timerElement.textContent = '00:00';
     markForfeit('Time expired before scenario completion.');
@@ -85,41 +90,6 @@ function startTimerLoop() {
   updateTimer();
   timerLoop = setInterval(updateTimer, 1000);
 }
-
-function updateClueCounter() {
-  if (!clueCounter) return;
-
-  const state = getState();
-  const remaining = 3 - (state.cluesUsed || 0);
-
-  clueCounter.textContent = `Clues Remaining: ${remaining}`;
-}
-
-function renderParticipantClues() {
-  if (!clueFeed) return;
-
-  const state = getState();
-  const clues = state.sentClues || [];
-
-  clueFeed.innerHTML = clues.length
-    ? clues.map((clue) => `
-      <article class="participant-clue-card">
-        <h3>Facilitator Clue</h3>
-        <p>${clue.message}</p>
-      </article>
-    `).join('')
-    : '<p>No facilitator clues received yet.</p>';
-}
-
-subscribe('CLUE_SENT', (clue) => {
-  const state = getState();
-
-  updateState({
-    sentClues: [...(state.sentClues || []), clue]
-  });
-
-  renderParticipantClues();
-});
 
 function completeScenario() {
   updateState({
@@ -139,20 +109,20 @@ function advanceScenarioStage() {
   if (!progression) return;
 
   const discoveries = state.discoveries || [];
+
   const ready = (progression.requiredDiscoveries || []).every((required) =>
     discoveries.includes(required)
   );
 
   if (!ready) {
-    if (discoveryFeed) {
-      discoveryFeed.innerHTML += `
-        <article class="participant-discovery-card">
-          <span>Reasoning Checkpoint</span>
-          <h3>More Evidence Needed</h3>
-          <p>Your team should gather and interpret more evidence before advancing.</p>
-        </article>
-      `;
-    }
+    discoveryFeed.innerHTML += `
+      <article class="participant-discovery-card">
+        <span>Reasoning Checkpoint</span>
+        <h3>Additional Evidence Required</h3>
+        <p>Your team must locate more physical evidence before progressing.</p>
+      </article>
+    `;
+
     return;
   }
 
@@ -167,15 +137,13 @@ function advanceScenarioStage() {
     currentStage: nextStage
   });
 
-  if (discoveryFeed) {
-    discoveryFeed.innerHTML += `
-      <article class="participant-discovery-card">
-        <span>Investigation Progression</span>
-        <h3>New Stage Unlocked</h3>
-        <p>${nextStage}</p>
-      </article>
-    `;
-  }
+  discoveryFeed.innerHTML += `
+    <article class="participant-discovery-card">
+      <span>Stage Progression</span>
+      <h3>New Investigation Phase</h3>
+      <p>${nextStage}</p>
+    </article>
+  `;
 }
 
 bindFormSubmission('#activation-form', (event) => {
@@ -193,7 +161,8 @@ bindFormSubmission('#activation-form', (event) => {
   });
 
   updateState({
-    currentStage: 'stage-01-activation'
+    currentStage: 'stage-01-activation',
+    discoveries: []
   });
 
   teamNameInput.setAttribute('disabled', true);
@@ -211,7 +180,8 @@ bindButtonAction('#scan-qr-btn', async () => {
   await startQrScanner({
     videoElement: qrVideo,
     onDiscovery: (value) => {
-      const discovery = getDiscoveryById(value);
+      const discoveryId = qrDiscoveryMap[value];
+      const discovery = getDiscoveryById(discoveryId);
 
       renderDiscovery(discovery);
 
@@ -227,15 +197,14 @@ bindButtonAction('#pin-submit-btn', () => {
   const result = validateInvestigationPin(pinInput?.value || '');
 
   if (!result.valid) {
-    if (discoveryFeed) {
-      discoveryFeed.innerHTML += `
-        <article class="participant-discovery-card">
-          <span>Access PIN</span>
-          <h3>Evidence Still Incomplete</h3>
-          <p>${result.message}</p>
-        </article>
-      `;
-    }
+    discoveryFeed.innerHTML += `
+      <article class="participant-discovery-card">
+        <span>Access PIN</span>
+        <h3>Evidence Still Incomplete</h3>
+        <p>${result.message}</p>
+      </article>
+    `;
+
     return;
   }
 
@@ -254,8 +223,6 @@ window.addEventListener('visibilitychange', () => {
   }
 });
 
-updateClueCounter();
 updateTimer();
-renderParticipantClues();
 
 console.log('investigation', getState());

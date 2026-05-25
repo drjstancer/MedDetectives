@@ -1,4 +1,6 @@
-<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Escalation Discoveries Prompt</title><style>body{font-family:Arial,sans-serif;padding:2rem;line-height:1.7;background:#f3efe8;color:#111}pre{white-space:pre-wrap;background:#fff;padding:1.5rem;border:1px solid #333}</style></head><body><h1>Escalation Discoveries Prompt</h1><pre>Create cinematic “escalation discovery” evidence artifacts for a facilitator-controlled educational reasoning experience. These discoveries should introduce tension and force reinterpretation of earlier assumptions.
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Escalation Discoveries Prompt</title><style>body{font-family:Arial,sans-serif;padding:2rem;line-height:1.7;background:#f3efe8;color:#111}pre{white-space:pre-wrap;background:#fff;padding:1.5rem;border:1px solid #333}</style></head><body><h1>Escalation Discoveries Prompt</h1>
+  
+  <pre id="promptText">Create cinematic “escalation discovery” evidence artifacts for a facilitator-controlled educational reasoning experience. These discoveries should introduce tension and force reinterpretation of earlier assumptions.
 
 Include:
 -sealed envelopes
@@ -14,4 +16,31 @@ Style:
 -immersive educational thriller
 -realistic paper materials
 -cinematic lighting
--sophisticated academic simulation aesthetic</pre></body></html>
+-sophisticated academic simulation aesthetic</pre></body>
+
+ <div class="prompt-actions">
+  <button id="copyPromptBtn">Copy Prompt</button>
+
+  <a href="../printables/jordan-carter-evidence-packet.html">
+    <button>Back to Facilitator Guide</button>
+  </a>
+</div>
+
+  <script>
+const copyButton = document.getElementById('copyPromptBtn');
+
+copyButton.addEventListener('click', async () => {
+  const promptText =
+    document.getElementById('promptText').innerText;
+
+  await navigator.clipboard.writeText(promptText);
+
+  copyButton.innerText = 'Prompt Copied';
+
+  setTimeout(() => {
+    copyButton.innerText = 'Copy Prompt';
+  }, 2000);
+});
+</script>
+
+</html>

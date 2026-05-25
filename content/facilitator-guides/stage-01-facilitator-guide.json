@@ -1,0 +1,25 @@
+{
+  "stageId": "stage-01-activation",
+  "facilitatorIntent": "Help participants become comfortable making interpretations before certainty is available.",
+  "learningFocus": [
+    "Collaborative observation",
+    "Evidence interpretation",
+    "Comfort with ambiguity",
+    "Team communication"
+  ],
+  "stallIndicators": [
+    "Participants repeatedly search for a single correct answer",
+    "Discussion becomes dominated by one participant",
+    "Teams stop revisiting earlier evidence"
+  ],
+  "guidancePrompts": [
+    "What evidence supports your interpretation?",
+    "What alternative explanation could also fit the evidence?",
+    "What information might your team still be missing?"
+  ],
+  "debriefQuestions": [
+    "What assumptions shaped your earliest conclusions?",
+    "How did your group's thinking evolve?",
+    "What uncertainty remained unresolved?"
+  ]
+}

@@ -1,7 +1,7 @@
 <!DOCTYPE html><html><head><meta charset='UTF-8'><title>Participant Journal Prompt</title><style>body{font-family:Arial,sans-serif;padding:2rem;line-height:1.7;background:#f3efe8;color:#111}pre{white-space:pre-wrap;background:#fff;padding:1.5rem;border:1px solid #333}</style></head><body>
 <h1>Participant Journal Prompt</h1>
   
-<pre>Create realistic handwritten participant journal pages for an immersive educational escape-room focused on collaborative clinical reasoning. The journal entries should belong to “Jordan Carter,” an overwhelmed student participant preparing for a leadership event.
+<pre id="promptText">Create realistic handwritten participant journal pages for an immersive educational escape-room focused on collaborative clinical reasoning. The journal entries should belong to “Jordan Carter,” an overwhelmed student participant preparing for a leadership event.
 Include:
 -handwritten reflections
 -stress masked by professionalism
@@ -25,4 +25,31 @@ Style:
 -warm desk lighting
 -notebook textures
 -cinematic realism
--subtle emotional atmosphere</pre></body></html>
+-subtle emotional atmosphere</pre></body>
+
+ <div class="prompt-actions">
+  <button id="copyPromptBtn">Copy Prompt</button>
+
+  <a href="../printables/jordan-carter-evidence-packet.html">
+    <button>Back to Facilitator Guide</button>
+  </a>
+</div>
+
+  <script>
+const copyButton = document.getElementById('copyPromptBtn');
+
+copyButton.addEventListener('click', async () => {
+  const promptText =
+    document.getElementById('promptText').innerText;
+
+  await navigator.clipboard.writeText(promptText);
+
+  copyButton.innerText = 'Prompt Copied';
+
+  setTimeout(() => {
+    copyButton.innerText = 'Copy Prompt';
+  }, 2000);
+});
+</script>
+
+</html>

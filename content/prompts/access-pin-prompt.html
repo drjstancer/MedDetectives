@@ -1,6 +1,6 @@
 <!DOCTYPE html><html><head><meta charset='UTF-8'><title>Access PIN Artifacts Prompt</title><style>body{font-family:Arial,sans-serif;padding:2rem;line-height:1.7;background:#f3efe8;color:#111}pre{white-space:pre-wrap;background:#fff;padding:1.5rem;border:1px solid #333}</style></head><body><h1>Access PIN Artifacts Prompt</h1>
   
-<pre>Create immersive physical access PIN artifacts for an educational escape-room investigation experience.
+<pre id="promptText">Create immersive physical access PIN artifacts for an educational escape-room investigation experience.
 
 Include:
 -handwritten numeric codes
@@ -21,4 +21,32 @@ Style:
 -photorealistic educational props
 -cinematic realism
 -realistic paper textures
--grounded immersive design</pre></body></html>
+-grounded immersive design</pre></body>
+
+  <div class="prompt-actions">
+  <button id="copyPromptBtn">Copy Prompt</button>
+
+  <a href="../printables/jordan-carter-evidence-packet.html">
+    <button>Back to Facilitator Guide</button>
+  </a>
+</div>
+
+  <script>
+const copyButton = document.getElementById('copyPromptBtn');
+
+copyButton.addEventListener('click', async () => {
+  const promptText =
+    document.getElementById('promptText').innerText;
+
+  await navigator.clipboard.writeText(promptText);
+
+  copyButton.innerText = 'Prompt Copied';
+
+  setTimeout(() => {
+    copyButton.innerText = 'Copy Prompt';
+  }, 2000);
+});
+</script>
+
+
+</html>

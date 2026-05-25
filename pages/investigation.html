@@ -59,8 +59,18 @@
         </p>
 
         <button id="scan-qr-btn" class="primary-button">
-          Scan QR Discovery
+          Open QR Scanner
         </button>
+
+        <div id="qr-scanner-shell" style="display:none;margin-top:1rem;">
+          <video
+            id="qr-video"
+            autoplay
+            muted
+            playsinline
+            style="width:100%;border-radius:14px;"
+          ></video>
+        </div>
 
         <div style="margin-top:1rem;">
           <input

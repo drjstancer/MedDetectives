@@ -1,0 +1,26 @@
+{
+  "id": "stage-01-activation",
+  "title": "Activation",
+  "description": "Participants begin the investigation by orienting themselves to the learning environment, identifying initial evidence, and developing early collaborative interpretations.",
+  "learningGoals": [
+    "Practice collaborative observation",
+    "Develop evidence awareness",
+    "Introduce iterative reasoning",
+    "Build participant confidence with uncertainty"
+  ],
+  "requiredDiscoveries": [
+    "welcome-brief",
+    "initial-evidence-board",
+    "participant-journal"
+  ],
+  "facilitatorGuidance": {
+    "openingPrompt": "What patterns or inconsistencies immediately stand out to your group?",
+    "stallPrompt": "What evidence have you not discussed yet?",
+    "reflectionPrompt": "What assumptions did your group make during your first interpretation?"
+  },
+  "unlockConditions": {
+    "type": "discovery-threshold",
+    "minimumDiscoveries": 3
+  },
+  "nextStage": "stage-02-conflicting-narratives"
+}

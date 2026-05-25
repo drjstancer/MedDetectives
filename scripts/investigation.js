@@ -1,4 +1,5 @@
 import { getState, updateState } from '../engine/state.js';
+import { subscribe } from '../engine/eventBus.js';
 import {
   activateParticipantSession,
   formatRemainingTime,

@@ -13,6 +13,7 @@ const clueCounter = document.getElementById('clue-counter');
 const activationForm = document.getElementById('activation-form');
 const clueButton = document.getElementById('clue-btn');
 const reasoningButton = document.getElementById('reasoning-btn');
+const completionPanel = document.getElementById('completion-panel');
 
 function updateTimer() {
   if (!timerElement) {
@@ -41,6 +42,16 @@ function updateClueCounter() {
   clueCounter.textContent = `Clues Remaining: ${remaining}`;
 }
 
+function completeScenario() {
+  updateState({
+    sessionStatus: 'completed'
+  });
+
+  if (completionPanel) {
+    completionPanel.style.display = 'block';
+  }
+}
+
 function advanceScenarioStage() {
   const state = getState();
   const currentStage = state.currentStage || 'stage-01-activation';
@@ -48,11 +59,16 @@ function advanceScenarioStage() {
   const progression = ProgressionMap[currentStage];
 
   if (!progression || !progression.unlocks.length) {
-    alert('Continue investigating unresolved evidence.');
+    completeScenario();
     return;
   }
 
   const nextStage = progression.unlocks[0];
+
+  if (nextStage === 'final-synthesis') {
+    completeScenario();
+    return;
+  }
 
   updateState({
     currentStage: nextStage

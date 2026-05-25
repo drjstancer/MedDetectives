@@ -45,6 +45,22 @@ function updateClueCounter() {
   clueCounter.textContent = `Clues Remaining: ${remaining}`;
 }
 
+function renderParticipantClues() {
+  if (!clueFeed) return;
+
+  const state = getState();
+  const clues = state.sentClues || [];
+
+  clueFeed.innerHTML = clues.length
+    ? clues.map((clue) => `
+      <article class="participant-clue-card">
+        <h3>Facilitator Clue</h3>
+        <p>${clue.message}</p>
+      </article>
+    `).join('')
+    : '<p>No facilitator clues received yet.</p>';
+}
+
 function completeScenario() {
   updateState({
     sessionStatus: 'completed'

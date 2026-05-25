@@ -1,0 +1,20 @@
+{
+  "id": "contradictory-observation",
+  "category": "observation",
+  "title": "Contradictory Observation Notes",
+  "description": "Two participant observations appear to conflict, creating uncertainty about what may have actually occurred.",
+  "discussionPrompts": [
+    "Can both observations contain partial truth?",
+    "What evidence could help clarify the contradiction?",
+    "How should uncertainty influence your group's confidence level?"
+  ],
+  "facilitatorNotes": {
+    "guidance": "Normalize disagreement and encourage learners to articulate reasoning instead of rushing toward consensus.",
+    "reflectionFocus": "Collaborative uncertainty navigation"
+  },
+  "tags": [
+    "conflicting-evidence",
+    "interpretation",
+    "collaboration"
+  ]
+}

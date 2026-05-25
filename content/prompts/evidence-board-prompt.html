@@ -1,4 +1,6 @@
-<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Evidence Board Prompt</title><style>body{font-family:Arial,sans-serif;padding:2rem;line-height:1.7;background:#f3efe8;color:#111}pre{white-space:pre-wrap;background:#fff;padding:1.5rem;border:1px solid #333}</style></head><body><h1>Evidence Board Arrangement Prompt</h1><pre>Create a cinematic collaborative evidence board for an educational clinical reasoning escape-room called “MedDetectives: Jordan Carter Case.” The board should feel like undergraduate pre-med students are actively synthesizing evidence in real time.
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Evidence Board Prompt</title><style>body{font-family:Arial,sans-serif;padding:2rem;line-height:1.7;background:#f3efe8;color:#111}pre{white-space:pre-wrap;background:#fff;padding:1.5rem;border:1px solid #333}</style></head><body><h1>Evidence Board Arrangement Prompt</h1>
+  
+<pre id="promptText">Create a cinematic collaborative evidence board for an educational clinical reasoning escape-room called “MedDetectives: Jordan Carter Case.” The board should feel like undergraduate pre-med students are actively synthesizing evidence in real time.
 
 Include:
 - Timeline fragments pinned inconsistently
@@ -16,4 +18,31 @@ Include:
 - Educational and collaborative tone
 - Warm cinematic lighting
 - Evidence synthesis rather than “solving a crime”
-- Style: immersive academic thriller, educational investigation board, photorealistic, highly detailed</pre></body></html>
+- Style: immersive academic thriller, educational investigation board, photorealistic, highly detailed</pre></body>
+
+ <div class="prompt-actions">
+  <button id="copyPromptBtn">Copy Prompt</button>
+
+  <a href="../printables/jordan-carter-evidence-packet.html">
+    <button>Back to Facilitator Guide</button>
+  </a>
+</div>
+
+  <script>
+const copyButton = document.getElementById('copyPromptBtn');
+
+copyButton.addEventListener('click', async () => {
+  const promptText =
+    document.getElementById('promptText').innerText;
+
+  await navigator.clipboard.writeText(promptText);
+
+  copyButton.innerText = 'Prompt Copied';
+
+  setTimeout(() => {
+    copyButton.innerText = 'Copy Prompt';
+  }, 2000);
+});
+</script>
+
+</html>

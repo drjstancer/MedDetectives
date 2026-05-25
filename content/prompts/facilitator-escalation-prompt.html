@@ -1,6 +1,6 @@
 <!DOCTYPE html><html><head><meta charset='UTF-8'><title>Facilitator Escalation Clue Card Prompt</title><style>body{font-family:Arial,sans-serif;padding:2rem;line-height:1.7;background:#f3efe8;color:#111}pre{white-space:pre-wrap;background:#fff;padding:1.5rem;border:1px solid #333}</style></head><body><h1>Facilitator Escalation Clue Card Prompt</h1>
   
-<pre>Create a facilitator-controlled escalation clue card for a hybrid educational clinical reasoning escape-room.
+<pre id="promptText">Create a facilitator-controlled escalation clue card for a hybrid educational clinical reasoning escape-room.
 
 The card should:
 -guide participants toward reinterpretation
@@ -20,4 +20,33 @@ Style:
 -warm cinematic educational aesthetic
 -minimalist modern academic design
 -realistic paper materials
--immersive collaborative learning atmosphere</pre></body></html>
+-immersive collaborative learning atmosphere</pre></body>
+
+
+
+ <div class="prompt-actions">
+  <button id="copyPromptBtn">Copy Prompt</button>
+
+  <a href="../printables/jordan-carter-evidence-packet.html">
+    <button>Back to Facilitator Guide</button>
+  </a>
+</div>
+
+  <script>
+const copyButton = document.getElementById('copyPromptBtn');
+
+copyButton.addEventListener('click', async () => {
+  const promptText =
+    document.getElementById('promptText').innerText;
+
+  await navigator.clipboard.writeText(promptText);
+
+  copyButton.innerText = 'Prompt Copied';
+
+  setTimeout(() => {
+    copyButton.innerText = 'Copy Prompt';
+  }, 2000);
+});
+</script>
+
+</html>

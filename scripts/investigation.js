@@ -8,6 +8,8 @@ import {
   markForfeit
 } from '../engine/sessionRuntime.js';
 import { ProgressionMap } from '../engine/progressionMap.js';
+import { getDiscoveryById } from '../engine/discoveryRegistry.js';
+import { validateInvestigationPin } from '../engine/pinValidator.js';
 import {
   bindButtonAction,
   bindFormSubmission
@@ -17,6 +19,19 @@ const timerElement = document.getElementById('countdown-timer');
 const clueCounter = document.getElementById('clue-counter');
 const completionPanel = document.getElementById('completion-panel');
 const clueFeed = document.getElementById('participant-clue-feed');
+const discoveryFeed = document.getElementById('discovery-feed');
+
+function renderDiscovery(discovery) {
+  if (!discoveryFeed || !discovery) return;
+
+  discoveryFeed.innerHTML += `
+    <article class="participant-discovery-card">
+      <span>${discovery.category}</span>
+      <h3>${discovery.title}</h3>
+      <p>${discovery.content}</p>
+    </article>
+  `;
+}
 
 function updateTimer() {
   if (!timerElement) {
@@ -34,7 +49,6 @@ function updateTimer() {
   if (remaining <= 0) {
     timerElement.textContent = '00:00';
     markForfeit('Time expired before scenario completion.');
-    alert('Investigation time has expired.');
   }
 }
 
@@ -103,7 +117,7 @@ function advanceScenarioStage() {
     currentStage: nextStage
   });
 
-  alert(`Stage Updated: ${nextStage}`);
+  console.log(`Stage Updated: ${nextStage}`);
 }
 
 bindFormSubmission('#activation-form', (event) => {
@@ -122,24 +136,31 @@ bindFormSubmission('#activation-form', (event) => {
   });
 
   updateTimer();
-
-  alert('Scenario Activated');
 });
 
-bindButtonAction('#clue-btn', () => {
-  const result = requestClue();
+bindButtonAction('#scan-qr-btn', () => {
+  const discovery = getDiscoveryById('qr-01');
 
-  if (!result.accepted) {
-    alert(result.message);
+  renderDiscovery(discovery);
+});
+
+bindButtonAction('#pin-submit-btn', () => {
+  const pinInput = document.getElementById('access-pin-input');
+
+  const result = validateInvestigationPin(pinInput?.value || '');
+
+  if (!result.valid) {
+    console.log(result.message);
     return;
   }
 
-  updateClueCounter();
+  const discovery = getDiscoveryById(result.discoveryId);
 
-  alert('Facilitator has been notified of your clue request.');
+  renderDiscovery(discovery);
 });
 
-bindButtonAction('#reasoning-btn', () => {
+bindButtonAction('#reasoning-btn', (event) => {
+  event.preventDefault();
   advanceScenarioStage();
 });
 

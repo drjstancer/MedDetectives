@@ -1,6 +1,6 @@
 <!DOCTYPE html><html><head><meta charset='UTF-8'><title>Contradictory Observation Evidence Card Prompt</title><style>body{font-family:Arial,sans-serif;padding:2rem;line-height:1.7;background:#f3efe8;color:#111}pre{white-space:pre-wrap;background:#fff;padding:1.5rem;border:1px solid #333}</style></head><body><h1>Contradictory Observation Evidence Card Prompt</h1>
   
-<pre>Create a cinematic contradictory evidence card designed to disrupt earlier assumptions in a collaborative educational investigation.
+<pre id="promptText">Create a cinematic contradictory evidence card designed to disrupt earlier assumptions in a collaborative educational investigation.
 
 Include:
 -a subtle but important contradiction
@@ -14,4 +14,31 @@ Style:
 -photorealistic printed evidence card
 -cinematic educational thriller aesthetic
 -realistic paper and ink textures
--immersive academic simulation design</pre></body></html>
+-immersive academic simulation design</pre></body>
+
+ <div class="prompt-actions">
+  <button id="copyPromptBtn">Copy Prompt</button>
+
+  <a href="../printables/jordan-carter-evidence-packet.html">
+    <button>Back to Facilitator Guide</button>
+  </a>
+</div>
+
+  <script>
+const copyButton = document.getElementById('copyPromptBtn');
+
+copyButton.addEventListener('click', async () => {
+  const promptText =
+    document.getElementById('promptText').innerText;
+
+  await navigator.clipboard.writeText(promptText);
+
+  copyButton.innerText = 'Prompt Copied';
+
+  setTimeout(() => {
+    copyButton.innerText = 'Copy Prompt';
+  }, 2000);
+});
+</script>
+
+</html>

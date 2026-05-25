@@ -9,6 +9,7 @@ import {
 } from '../engine/uiBindings.js';
 
 const sessionTimer = document.querySelector('.timer');
+const sessionCodeDisplay = document.getElementById('session-code-display');
 const guidancePanels = document.querySelectorAll('.snapshot-card');
 
 function refreshFacilitatorView() {
@@ -16,6 +17,10 @@ function refreshFacilitatorView() {
 
   if (sessionTimer && state.sessionStatus === 'active') {
     sessionTimer.textContent = formatRemainingTime();
+  }
+
+  if (sessionCodeDisplay && state.sessionCode) {
+    sessionCodeDisplay.textContent = state.sessionCode;
   }
 
   const cluePanel = Array.from(guidancePanels)
@@ -33,7 +38,11 @@ function refreshFacilitatorView() {
   }
 }
 
-bindButtonAction('.primary-button', () => {
+bindButtonAction('#print-prep-btn', () => {
+  alert('Prepare printed evidence packets, QR markers, clue envelopes, and evidence board materials.');
+});
+
+bindButtonAction('#activate-session-btn', () => {
   const state = createFacilitatorSession();
 
   alert(`Scenario Activated: ${state.sessionCode}`);
@@ -41,7 +50,7 @@ bindButtonAction('.primary-button', () => {
   refreshFacilitatorView();
 });
 
-bindButtonAction('.secondary-button', () => {
+bindButtonAction('#send-clue-btn', () => {
   sendClue();
 
   alert('Clue sent to participants.');

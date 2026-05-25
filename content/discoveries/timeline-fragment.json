@@ -1,0 +1,20 @@
+{
+  "id": "timeline-fragment",
+  "category": "timeline_event",
+  "title": "Incomplete Timeline Fragment",
+  "description": "A partially reconstructed sequence of events containing inconsistent timestamps and missing contextual details.",
+  "discussionPrompts": [
+    "What information appears reliable versus uncertain?",
+    "How might the missing context influence interpretation?",
+    "What assumptions could participants unintentionally make while sequencing events?"
+  ],
+  "facilitatorNotes": {
+    "guidance": "Encourage participants to explain the reasoning behind timeline placement decisions.",
+    "reflectionFocus": "Interpretive flexibility and evidence sequencing"
+  },
+  "tags": [
+    "timeline",
+    "ambiguity",
+    "sequencing"
+  ]
+}

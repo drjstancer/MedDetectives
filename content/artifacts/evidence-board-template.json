@@ -1,0 +1,27 @@
+{
+  "id": "evidence-board-template",
+  "title": "Collaborative Evidence Board",
+  "type": "physical-digital hybrid artifact",
+  "educationalPurpose": [
+    "Encourage collaborative interpretation",
+    "Support visible reasoning",
+    "Help participants revisit assumptions",
+    "Promote evidence synthesis"
+  ],
+  "physicalComponents": [
+    "Printed evidence cards",
+    "String/yarn relationship mapping",
+    "Sticky-note interpretation prompts",
+    "Whiteboard annotation space"
+  ],
+  "digitalSupport": [
+    "QR-linked discovery tracking",
+    "Collaborative synthesis updates",
+    "Facilitator pacing awareness"
+  ],
+  "facilitatorRecommendations": [
+    "Encourage participants to explain why evidence connections exist.",
+    "Prompt learners to revisit earlier interpretations after new discoveries.",
+    "Normalize disagreement and evolving theories."
+  ]
+}

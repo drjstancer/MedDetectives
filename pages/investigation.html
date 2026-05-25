@@ -3,21 +3,82 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Investigation</title>
-  <link rel="stylesheet" href="../style.css" />
+  <title>Investigation Session</title>
+  <link rel="stylesheet" href="../styles/main.css" />
 </head>
 <body>
-  <main class="screen">
-    <section class="hero-panel">
-      <p class="status-tag">Scene Investigation</p>
-      <h1>Jordan Carter Case</h1>
-      <div class="mission-card">
-        <h2>Evidence Search</h2>
-        <button id="scan-btn">Log QR Discovery</button>
-        <button id="next-btn">Submit Team Reasoning</button>
+  <main class="session-shell">
+    <section class="session-header">
+      <div>
+        <p class="eyebrow">Active Investigation</p>
+        <h1>Jordan Carter Case</h1>
+      </div>
+
+      <div>
+        <p class="eyebrow">Time Remaining</p>
+        <p class="timer" id="countdown-timer">60:00</p>
       </div>
     </section>
+
+    <section class="portal-card">
+      <p class="eyebrow">Scenario Activation</p>
+
+      <form id="activation-form">
+        <label for="teamName">Team Name</label>
+        <input id="teamName" required />
+
+        <label for="sessionCode">Session Code</label>
+        <input id="sessionCode" required />
+
+        <button type="submit" class="primary-button">
+          Activate Investigation
+        </button>
+      </form>
+    </section>
+
+    <section class="synthesis-board">
+      <article class="portal-card">
+        <p class="eyebrow">Discovery Tools</p>
+
+        <h2>Active Investigation Tools</h2>
+
+        <button id="scan-btn" class="primary-button">
+          Scan QR Discovery
+        </button>
+
+        <button id="pin-btn" class="secondary-button">
+          Enter Access PIN
+        </button>
+      </article>
+
+      <article class="portal-card">
+        <p class="eyebrow">Collaborative Reasoning</p>
+
+        <h2>Emerging Interpretation</h2>
+
+        <p>
+          Continue discussing evidence relationships and unresolved questions.
+        </p>
+
+        <button id="reasoning-btn" class="secondary-button">
+          Submit Team Reasoning
+        </button>
+      </article>
+
+      <article class="portal-card">
+        <p class="eyebrow">Facilitator Support</p>
+
+        <h2>Clue Requests</h2>
+
+        <p id="clue-counter">Clues Remaining: 3</p>
+
+        <button id="clue-btn" class="primary-button">
+          Request Clue
+        </button>
+      </article>
+    </section>
   </main>
+
   <script type="module" src="../scripts/investigation.js"></script>
 </body>
 </html>

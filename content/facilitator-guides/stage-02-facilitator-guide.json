@@ -1,0 +1,25 @@
+{
+  "stageId": "stage-02-conflicting-narratives",
+  "facilitatorIntent": "Support learners as they navigate disagreement, conflicting interpretations, and evolving collaborative reasoning.",
+  "learningFocus": [
+    "Collaborative disagreement",
+    "Evidence reinterpretation",
+    "Iterative reasoning",
+    "Perspective-sharing"
+  ],
+  "stallIndicators": [
+    "Participants become overly focused on finding the single correct interpretation",
+    "Teams stop revisiting earlier evidence",
+    "One perspective dominates group interpretation"
+  ],
+  "guidancePrompts": [
+    "What evidence supports the competing interpretations?",
+    "How might another group reasonably interpret this evidence differently?",
+    "What information still feels uncertain or incomplete?"
+  ],
+  "debriefQuestions": [
+    "How did your group handle disagreement?",
+    "What interpretation changed most during this stage?",
+    "What helped your group reconsider earlier assumptions?"
+  ]
+}

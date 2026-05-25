@@ -180,8 +180,24 @@ bindButtonAction('#scan-qr-btn', async () => {
   await startQrScanner({
     videoElement: qrVideo,
     onDiscovery: (value) => {
-      const discoveryId = qrDiscoveryMap[value];
+      const discoveryId = qrDiscoveryMap[value] || value;
       const discovery = getDiscoveryById(discoveryId);
+
+      if (!discovery) {
+        discoveryFeed.innerHTML += `
+          <article class="participant-discovery-card">
+            <span>Scan Error</span>
+            <h3>Unknown Artifact</h3>
+            <p>The scanned QR code does not match an investigation artifact.</p>
+          </article>
+        `;
+
+        if (qrShell) {
+          qrShell.style.display = 'none';
+        }
+
+        return;
+      }
 
       renderDiscovery(discovery);
 

@@ -1,4 +1,6 @@
-<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Room Diagram Prompt</title><style>body{font-family:Arial,sans-serif;padding:2rem;line-height:1.7;background:#f3efe8;color:#111}pre{white-space:pre-wrap;background:#fff;padding:1.5rem;border:1px solid #333}</style></head><body><h1>Room Diagram Prompt</h1><pre>Create a cinematic top-down hybrid educational escape-room layout for a pre-med clinical reasoning experience called “MedDetectives: Jordan Carter Case.” The environment should feel immersive, facilitator-led, collaborative, and intellectually engaging rather than horror-themed or game-like. The room should be divided into clearly defined investigation zones with subtle lighting differences and realistic educational staging.
+<!DOCTYPE html><html><head><meta charset='UTF-8'><title>Room Diagram Prompt</title><style>body{font-family:Arial,sans-serif;padding:2rem;line-height:1.7;background:#f3efe8;color:#111}pre{white-space:pre-wrap;background:#fff;padding:1.5rem;border:1px solid #333}</style></head><body><h1>Room Diagram Prompt</h1>
+  
+<pre id="promptText">Create a cinematic top-down hybrid educational escape-room layout for a pre-med clinical reasoning experience called “MedDetectives: Jordan Carter Case.” The environment should feel immersive, facilitator-led, collaborative, and intellectually engaging rather than horror-themed or game-like. The room should be divided into clearly defined investigation zones with subtle lighting differences and realistic educational staging.
 Include:
 -Investigation Zone A: Initial Evidence Table with witness statements, folders, participant journals, sticky notes, and timeline fragments
 -Investigation Zone B: QR Discovery Area with hidden QR sheets attached under tables, behind clipboards, and near evidence props
@@ -10,4 +12,31 @@ Include:
 -Printed artifacts scattered realistically
 -Modern university classroom transformed into immersive investigative environment
 -Realistic proportions and believable educational staging
--Style: cinematic educational thriller, immersive learning environment, photorealistic, high detail, realistic textures, soft volumetric lighting, modern educational design aesthetic</pre></body></html>
+-Style: cinematic educational thriller, immersive learning environment, photorealistic, high detail, realistic textures, soft volumetric lighting, modern educational design aesthetic</pre></body>
+
+ <div class="prompt-actions">
+  <button id="copyPromptBtn">Copy Prompt</button>
+
+  <a href="../printables/jordan-carter-evidence-packet.html">
+    <button>Back to Facilitator Guide</button>
+  </a>
+</div>
+
+  <script>
+const copyButton = document.getElementById('copyPromptBtn');
+
+copyButton.addEventListener('click', async () => {
+  const promptText =
+    document.getElementById('promptText').innerText;
+
+  await navigator.clipboard.writeText(promptText);
+
+  copyButton.innerText = 'Prompt Copied';
+
+  setTimeout(() => {
+    copyButton.innerText = 'Copy Prompt';
+  }, 2000);
+});
+</script>
+
+</html>

@@ -1,0 +1,20 @@
+{
+  "id": "participant-journal",
+  "category": "artifact",
+  "title": "Participant Journal Fragment",
+  "description": "A partially completed reflective journal containing fragmented observations, emotional responses, and unanswered questions.",
+  "discussionPrompts": [
+    "Which observations appear objective versus interpretive?",
+    "What information might still be missing?",
+    "How confident is your group in its current interpretation?"
+  ],
+  "facilitatorNotes": {
+    "guidance": "Encourage learners to distinguish between evidence and assumption.",
+    "reflectionFocus": "Comfort with uncertainty and iterative interpretation"
+  },
+  "tags": [
+    "reflection",
+    "observation",
+    "ambiguity"
+  ]
+}

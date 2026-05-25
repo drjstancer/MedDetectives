@@ -1,0 +1,20 @@
+{
+  "id": "facilitator-envelope-template",
+  "title": "Facilitator Guidance Envelope",
+  "type": "physical facilitator support artifact",
+  "educationalPurpose": [
+    "Support facilitator pacing",
+    "Introduce reflective prompts",
+    "Encourage collaborative reconsideration"
+  ],
+  "physicalComponents": [
+    "Printed facilitator prompt cards",
+    "Stage-specific reflection cues",
+    "Collaborative discussion nudges"
+  ],
+  "facilitatorUsage": [
+    "Use only when groups become stalled or overly certainty-focused.",
+    "Prioritize reflective questioning over direct answers.",
+    "Encourage participants to explain reasoning aloud."
+  ]
+}

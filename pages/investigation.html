@@ -54,6 +54,10 @@
         <button id="pin-btn" class="secondary-button">
           Enter Access PIN
         </button>
+
+        <div id="discovery-results" class="empty-state">
+          No discoveries activated yet.
+        </div>
       </article>
 
       <article class="portal-card">
@@ -62,12 +66,29 @@
         <h2>Evidence Synthesis</h2>
 
         <p>
-          Discuss unresolved evidence and submit your group's evolving interpretation.
+          Select the interpretation your team currently believes is best supported.
         </p>
 
-        <button id="reasoning-btn" class="secondary-button">
-          Submit Team Reasoning
-        </button>
+        <form id="reasoning-form">
+          <label>
+            <input type="radio" name="reasoning" value="stress-response" />
+            Jordan experienced a stress-related medical episode during the event.
+          </label>
+
+          <label>
+            <input type="radio" name="reasoning" value="conflicting-account" />
+            Witness accounts are inconsistent because the timeline is incomplete.
+          </label>
+
+          <label>
+            <input type="radio" name="reasoning" value="evidence-conflict" />
+            Physical evidence conflicts with at least one participant narrative.
+          </label>
+
+          <button type="submit" id="reasoning-btn" class="secondary-button">
+            Submit Team Reasoning
+          </button>
+        </form>
       </article>
 
       <article class="portal-card">
@@ -80,6 +101,10 @@
         <button id="clue-btn" class="primary-button">
           Request Clue
         </button>
+
+        <div id="received-clues" class="empty-state">
+          No clues received.
+        </div>
       </article>
     </section>
 

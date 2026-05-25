@@ -1,6 +1,6 @@
 <!DOCTYPE html><html><head><meta charset='UTF-8'><title>Timeline Fragment Cards Prompt</title><style>body{font-family:Arial,sans-serif;padding:2rem;line-height:1.7;background:#f3efe8;color:#111}pre{white-space:pre-wrap;background:#fff;padding:1.5rem;border:1px solid #333}</style></head><body><h1>Timeline Fragment Cards Prompt</h1>
   
-<pre>Create printable timeline fragment cards for a collaborative educational investigation experience. The cards should represent fragmented and partially conflicting recollections of a student leadership event timeline.
+<pre id="promptText">Create printable timeline fragment cards for a collaborative educational investigation experience. The cards should represent fragmented and partially conflicting recollections of a student leadership event timeline.
 Include:
 -timestamps
 -fragmented event descriptions
@@ -16,4 +16,31 @@ Style:
 -photorealistic printed paper
 -cinematic tabletop arrangement
 -immersive educational simulation materials
--realistic shadows and textures</pre></body></html>
+-realistic shadows and textures</pre></body>
+
+ <div class="prompt-actions">
+  <button id="copyPromptBtn">Copy Prompt</button>
+
+  <a href="../printables/jordan-carter-evidence-packet.html">
+    <button>Back to Facilitator Guide</button>
+  </a>
+</div>
+
+  <script>
+const copyButton = document.getElementById('copyPromptBtn');
+
+copyButton.addEventListener('click', async () => {
+  const promptText =
+    document.getElementById('promptText').innerText;
+
+  await navigator.clipboard.writeText(promptText);
+
+  copyButton.innerText = 'Prompt Copied';
+
+  setTimeout(() => {
+    copyButton.innerText = 'Copy Prompt';
+  }, 2000);
+});
+</script>
+
+</html>

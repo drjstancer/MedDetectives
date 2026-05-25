@@ -1,0 +1,12 @@
+{
+  "id": "timeline-fragment-01",
+  "title": "Timeline Fragment",
+  "stage": "Evidence Reconciliation",
+  "type": "qr-discovery",
+  "prompt": "Participants uncover a timeline card hidden behind witness statements.",
+  "content": "Multiple witness accounts disagree about who first noticed Jordan in distress.",
+  "facilitatorGuidance": "Encourage participants to compare assumptions against evidence rather than selecting the most confident witness.",
+  "unlocks": [
+    "contradictory-observation-01"
+  ]
+}

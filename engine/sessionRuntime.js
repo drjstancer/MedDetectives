@@ -10,45 +10,47 @@ function generateSessionCode() {
 
 export function createFacilitatorSession(scenarioId = 'jordan-carter-case') {
   const sessionCode = generateSessionCode();
-  const createdAt = new Date().toISOString();
+  const startedAt = new Date();
+  const expiresAt = new Date(startedAt.getTime() + SESSION_DURATION_MS);
 
   const state = updateState({
     scenarioId,
     sessionCode,
-    sessionStatus: 'ready',
+    sessionStatus: 'active',
+    currentStage: 'Scenario Activation',
     clueRequests: [],
     cluesUsed: 0,
-    createdAt
+    sentClues: [],
+    startedAt: startedAt.toISOString(),
+    expiresAt: expiresAt.toISOString()
   });
 
   publish('FACILITATOR_SESSION_CREATED', {
     scenarioId,
     sessionCode,
-    createdAt
+    startedAt: startedAt.toISOString(),
+    expiresAt: expiresAt.toISOString()
   });
 
   return state;
 }
 
 export function activateParticipantSession({ teamName, sessionCode }) {
-  const startedAt = new Date();
-  const expiresAt = new Date(startedAt.getTime() + SESSION_DURATION_MS);
-
   const state = updateState({
     groupName: teamName,
     sessionCode,
     sessionStatus: 'active',
-    startedAt: startedAt.toISOString(),
-    expiresAt: expiresAt.toISOString(),
     cluesUsed: getState().cluesUsed || 0,
-    clueRequests: getState().clueRequests || []
+    clueRequests: getState().clueRequests || [],
+    startedAt: getState().startedAt,
+    expiresAt: getState().expiresAt
   });
 
   publish('PARTICIPANT_SESSION_ACTIVATED', {
     teamName,
     sessionCode,
-    startedAt: startedAt.toISOString(),
-    expiresAt: expiresAt.toISOString()
+    startedAt: state.startedAt,
+    expiresAt: state.expiresAt
   });
 
   return state;

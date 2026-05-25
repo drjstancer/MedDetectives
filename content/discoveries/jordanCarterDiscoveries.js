@@ -1,0 +1,26 @@
+export const jordanCarterDiscoveries = [
+  {
+    id: 'qr-01',
+    type: 'timeline-fragment',
+    title: 'Shift in Emotional Presentation',
+    category: 'Observation Conflict',
+    content: 'Jordan appeared increasingly withdrawn well before the reported escalation moment.',
+    emotionalTone: 'uncertainty'
+  },
+  {
+    id: 'qr-02',
+    type: 'journal-fragment',
+    title: 'Hidden Reflection Fragment',
+    category: 'Participant Discovery',
+    content: 'A partially hidden journal entry suggests Jordan felt overlooked during collaborative group interactions.',
+    emotionalTone: 'reflection'
+  },
+  {
+    id: 'pin-01',
+    type: 'escalation-evidence',
+    title: 'Escalation Evidence Unlocked',
+    category: 'Interpretation Shift',
+    content: 'New evidence complicates earlier assumptions about the timeline of distress signals.',
+    emotionalTone: 'tension'
+  }
+];

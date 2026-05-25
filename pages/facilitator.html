@@ -30,9 +30,14 @@
           <li>Arrange collaborative evidence board</li>
         </ul>
 
-        <button id="print-prep-btn" class="primary-button">
-          Print Prep Materials
-        </button>
+        <a
+          id="print-prep-btn"
+          class="primary-button"
+          href="../content/printables/jordan-carter-evidence-packet.html"
+          target="_blank"
+        >
+          Open Printable Materials
+        </a>
       </article>
 
       <article class="portal-card">
@@ -50,29 +55,58 @@
       </article>
     </section>
 
+    <section class="portal-grid">
+      <article class="portal-card">
+        <p class="eyebrow">Investigation Progression</p>
+
+        <h2>Stage Progression Map</h2>
+
+        <ol>
+          <li>Scenario Activation</li>
+          <li>Conflicting Narratives</li>
+          <li>Evidence Reconciliation</li>
+          <li>Final Synthesis</li>
+        </ol>
+      </article>
+
+      <article class="portal-card">
+        <p class="eyebrow">Facilitator Guidance</p>
+
+        <h2>Current Facilitation Focus</h2>
+
+        <div id="facilitator-guidance-panel">
+          Encourage participants to compare conflicting witness perspectives before requesting a clue.
+        </div>
+      </article>
+    </section>
+
     <section class="snapshot-grid">
       <article class="snapshot-card">
         <h2>Session Timer</h2>
-        <p class="timer">58:42</p>
+        <p class="timer" id="facilitator-timer">60:00</p>
       </article>
 
       <article class="snapshot-card">
         <h2>Current Stage</h2>
-        <p>Conflicting Narratives</p>
+        <p id="current-stage-display">Scenario Activation</p>
       </article>
 
       <article class="snapshot-card">
         <h2>Clue Requests</h2>
+
+        <select id="clue-select">
+          <option value="timeline">Timeline Tension</option>
+          <option value="observation">Observation Conflict</option>
+          <option value="synthesis">Reasoning Synthesis</option>
+        </select>
+
         <button id="send-clue-btn" class="secondary-button">
           Send Clue
         </button>
-      </article>
 
-      <article class="snapshot-card">
-        <h2>Facilitator Guidance</h2>
-        <p>
-          Encourage participants to revisit earlier evidence assumptions.
-        </p>
+        <div id="used-clues" class="empty-state">
+          No clues sent.
+        </div>
       </article>
     </section>
   </main>

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "clue-01",
+    "stage": "stage-01-activation",
+    "title": "Timeline Tension",
+    "message": "Your team may be focusing too heavily on a single witness perspective. Compare the timeline fragments again."
+  },
+  {
+    "id": "clue-02",
+    "stage": "stage-02-conflicting-narratives",
+    "title": "Observation Conflict",
+    "message": "One observation appears reliable at first glance but conflicts with physical evidence in the room."
+  },
+  {
+    "id": "clue-03",
+    "stage": "final-synthesis",
+    "title": "Reasoning Synthesis",
+    "message": "Focus less on certainty and more on which interpretation is best supported by the evidence available."
+  }
+]

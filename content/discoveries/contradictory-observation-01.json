@@ -1,0 +1,10 @@
+{
+  "id": "contradictory-observation-01",
+  "title": "Contradictory Observation",
+  "stage": "Final Synthesis",
+  "type": "pin-discovery",
+  "prompt": "Participants unlock a sealed observation envelope using a discovered access PIN.",
+  "content": "A participant quietly reported Jordan appeared distressed much earlier than initially described during interviews.",
+  "facilitatorGuidance": "Encourage the group to revisit their earlier assumptions and discuss why some evidence initially felt more trustworthy than others.",
+  "unlocks": []
+}

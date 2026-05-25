@@ -61,6 +61,16 @@ function renderParticipantClues() {
     : '<p>No facilitator clues received yet.</p>';
 }
 
+subscribe('CLUE_SENT', (clue) => {
+  const state = getState();
+
+  updateState({
+    sentClues: [...(state.sentClues || []), clue]
+  });
+
+  renderParticipantClues();
+});
+
 function completeScenario() {
   updateState({
     sessionStatus: 'completed'

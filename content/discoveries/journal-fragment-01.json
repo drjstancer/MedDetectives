@@ -1,0 +1,12 @@
+{
+  "id": "journal-fragment-01",
+  "title": "Participant Journal Fragment",
+  "stage": "Conflicting Narratives",
+  "type": "qr-discovery",
+  "prompt": "Participants discover a folded journal page hidden beneath the evidence board.",
+  "content": "Jordan wrote about feeling pressure to appear composed despite increasing stress before the leadership event.",
+  "facilitatorGuidance": "Encourage participants to compare this emotional framing against witness observations.",
+  "unlocks": [
+    "timeline-fragment-01"
+  ]
+}

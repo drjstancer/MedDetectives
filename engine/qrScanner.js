@@ -6,22 +6,35 @@ export async function startQrScanner({
 
   const stream = await navigator.mediaDevices.getUserMedia({
     video: {
-      facingMode: 'environment'
-    }
+      facingMode: {
+        ideal: 'environment'
+      }
+    },
+    audio: false
   });
 
   videoElement.srcObject = stream;
   videoElement.setAttribute('playsinline', true);
+  videoElement.muted = true;
 
   await videoElement.play();
+
+  if (!('BarcodeDetector' in window)) {
+    console.warn('BarcodeDetector API not supported in this browser');
+    return;
+  }
 
   const detector = new BarcodeDetector({
     formats: ['qr_code']
   });
 
-  async function scanFrame() {
+  let scanning = true;
+
+  async function scanLoop() {
+    if (!scanning) return;
+
     if (videoElement.readyState !== 4) {
-      requestAnimationFrame(scanFrame);
+      requestAnimationFrame(scanLoop);
       return;
     }
 
@@ -31,17 +44,20 @@ export async function startQrScanner({
       if (barcodes.length > 0) {
         const value = barcodes[0].rawValue;
 
+        scanning = false;
+
         stream.getTracks().forEach((track) => track.stop());
 
         onDiscovery(value);
+
         return;
       }
     } catch (error) {
       console.warn('QR scan error', error);
     }
 
-    requestAnimationFrame(scanFrame);
+    requestAnimationFrame(scanLoop);
   }
 
-  scanFrame();
+  requestAnimationFrame(scanLoop);
 }

@@ -1,0 +1,19 @@
+{
+  "clues": [
+    {
+      "id": "clue-01",
+      "title": "Timeline Reflection",
+      "content": "Revisit the emotional observations and compare them against the reconstructed timeline."
+    },
+    {
+      "id": "clue-02",
+      "title": "Confidence Check",
+      "content": "Consider whether confidence and accuracy are always aligned."
+    },
+    {
+      "id": "clue-03",
+      "title": "Witness Tension",
+      "content": "Which witness account feels most stable after the escalation discoveries?"
+    }
+  ]
+}

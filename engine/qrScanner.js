@@ -4,6 +4,9 @@ export async function startQrScanner({
 }) {
   if (!videoElement) return;
 
+  const canvas = document.getElementById('qr-canvas');
+  const context = canvas.getContext('2d');
+
   const stream = await navigator.mediaDevices.getUserMedia({
     video: {
       facingMode: {
@@ -19,15 +22,6 @@ export async function startQrScanner({
 
   await videoElement.play();
 
-  if (!('BarcodeDetector' in window)) {
-    console.warn('BarcodeDetector API not supported in this browser');
-    return;
-  }
-
-  const detector = new BarcodeDetector({
-    formats: ['qr_code']
-  });
-
   let scanning = true;
 
   async function scanLoop() {
@@ -38,22 +32,32 @@ export async function startQrScanner({
       return;
     }
 
-    try {
-      const barcodes = await detector.detect(videoElement);
+    canvas.width = videoElement.videoWidth;
+    canvas.height = videoElement.videoHeight;
 
-      if (barcodes.length > 0) {
-        const value = barcodes[0].rawValue;
+    context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
 
-        scanning = false;
+    const imageData = context.getImageData(
+      0,
+      0,
+      canvas.width,
+      canvas.height
+    );
 
-        stream.getTracks().forEach((track) => track.stop());
+    const qrResult = window.jsQR(
+      imageData.data,
+      canvas.width,
+      canvas.height
+    );
 
-        onDiscovery(value);
+    if (qrResult && qrResult.data) {
+      scanning = false;
 
-        return;
-      }
-    } catch (error) {
-      console.warn('QR scan error', error);
+      stream.getTracks().forEach((track) => track.stop());
+
+      onDiscovery(qrResult.data);
+
+      return;
     }
 
     requestAnimationFrame(scanLoop);

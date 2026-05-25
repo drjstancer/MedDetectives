@@ -1,6 +1,6 @@
 <!DOCTYPE html><html><head><meta charset='UTF-8'><title>Observation Evidence Cards Prompt</title><style>body{font-family:Arial,sans-serif;padding:2rem;line-height:1.7;background:#f3efe8;color:#111}pre{white-space:pre-wrap;background:#fff;padding:1.5rem;border:1px solid #333}</style></head><body><h1>Observation Evidence Cards Prompt</h1>
   
-<pre>Create professional observation evidence cards for a collaborative educational reasoning experience. These cards should contain observational statements from participants and witnesses during a leadership event.
+<pre id="promptText">Create professional observation evidence cards for a collaborative educational reasoning experience. These cards should contain observational statements from participants and witnesses during a leadership event.
 
 Include:
 -emotionally nuanced observations
@@ -16,4 +16,31 @@ Style:
 -realistic printed cards
 -cinematic tabletop photography
 -educational immersion aesthetic
--warm realistic lighting</pre></body></html>
+-warm realistic lighting</pre></body>
+
+ <div class="prompt-actions">
+  <button id="copyPromptBtn">Copy Prompt</button>
+
+  <a href="../printables/jordan-carter-evidence-packet.html">
+    <button>Back to Facilitator Guide</button>
+  </a>
+</div>
+
+  <script>
+const copyButton = document.getElementById('copyPromptBtn');
+
+copyButton.addEventListener('click', async () => {
+  const promptText =
+    document.getElementById('promptText').innerText;
+
+  await navigator.clipboard.writeText(promptText);
+
+  copyButton.innerText = 'Prompt Copied';
+
+  setTimeout(() => {
+    copyButton.innerText = 'Copy Prompt';
+  }, 2000);
+});
+</script>
+
+</html>

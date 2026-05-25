@@ -1,37 +1,148 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Investigation Stage</title>
+  <title>MedDetectives — Investigation</title>
   <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../styles/investigation.css" />
 </head>
 <body>
-  <main class="screen">
-    <section class="hero-panel">
-      <p class="status-tag">Challenge Stage</p>
-      <h1>Scene Investigation</h1>
 
-      <div class="mission-card">
-        <h2>Evidence Search</h2>
+  <main class="screen" id="app-root">
 
-        <p>
-          Your squad has entered the investigation phase.
-          Examine the available clues and identify the most important observations.
-        </p>
+    <!-- Stage Header -->
+    <header class="stage-header">
+      <div class="stage-header-left">
+        <span class="status-tag">Stage 1 — Scene Investigation</span>
+        <h1>Jordan Carter, 17</h1>
+        <p class="subtitle">Mizzou Summer Basketball Invitational &middot; Collapsed on sideline</p>
+      </div>
+      <div class="stage-header-right">
+        <div class="timer-badge" id="timer-display">⏱ 00:00</div>
+        <div class="escalation-indicator" id="escalation-indicator" hidden>
+          ⚠️ Situation Escalating
+        </div>
+      </div>
+    </header>
 
-        <ul>
-          <li>Search the room for evidence markers.</li>
-          <li>Document unusual findings.</li>
-          <li>Discuss possible explanations.</li>
-          <li>Prepare to unlock the next sequence.</li>
-        </ul>
+    <!-- QR Discovery Banner (shown after a QR scan) -->
+    <div class="qr-banner" id="qr-banner" hidden>
+      <span id="qr-banner-text">🔍 Evidence logged from QR scan.</span>
+      <button class="qr-banner-close" id="qr-banner-close">&times;</button>
+    </div>
 
-        <button>
-          Awaiting Next Unlock
-        </button>
+    <!-- Two-Column Layout -->
+    <section class="two-col-layout">
+
+      <!-- LEFT COLUMN -->
+      <div class="col-left">
+
+        <!-- Patient Status Panel -->
+        <div class="panel" id="patient-status-panel">
+          <h2 class="panel-title">📋 Patient Status</h2>
+          <div class="vitals-grid" id="vitals-grid">
+            <div class="vital-loading">Loading status readings…</div>
+          </div>
+          <div class="status-notes" id="status-notes"></div>
+        </div>
+
+        <!-- Discovery Board -->
+        <div class="panel" id="discovery-board">
+          <h2 class="panel-title">🔍 Discovered Evidence</h2>
+          <p class="discovery-instructions">
+            Search the physical room for evidence markers. Scan a QR code or
+            enter an Evidence ID to log a discovery.
+          </p>
+          <ul class="clue-list" id="clue-list">
+            <li class="clue-empty" id="clue-empty-state">
+              No evidence discovered yet. Begin your search.
+            </li>
+          </ul>
+          <div class="clue-counter" id="clue-counter">Evidence: 0 of 3 found</div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="col-right">
+
+        <!-- Learning Objectives -->
+        <div class="panel" id="objective-panel">
+          <h2 class="panel-title">🎯 Learning Objectives</h2>
+          <ul class="objectives-list" id="objectives-list">
+            <li class="objective-loading">Loading objectives…</li>
+          </ul>
+        </div>
+
+        <!-- QR / Manual Evidence Entry -->
+        <div class="panel qr-panel" id="qr-prompt-panel">
+          <h2 class="panel-title">📱 Log Evidence Discovery</h2>
+          <p>Scan a QR code from an evidence marker in the room, or enter the
+          Evidence ID printed below the marker.</p>
+          <div class="qr-input-row">
+            <input
+              type="text"
+              id="manual-clue-input"
+              placeholder="e.g. CLUE-001"
+              autocomplete="off"
+              autocapitalize="characters"
+            />
+            <button class="btn-primary" id="log-evidence-btn">Log Evidence</button>
+          </div>
+          <p class="qr-hint">QR codes in the physical room link directly to this page.</p>
+        </div>
+
+        <!-- Active Challenge -->
+        <div class="panel" id="challenge-panel">
+          <h2 class="panel-title">🧩 Active Challenge</h2>
+          <div id="challenge-locked" class="challenge-locked">
+            <p>Discover all 3 evidence items to unlock the Activity Timeline challenge.</p>
+            <div class="challenge-lock-progress" id="challenge-lock-progress">
+              <span class="lock-pip" id="pip-0"></span>
+              <span class="lock-pip" id="pip-1"></span>
+              <span class="lock-pip" id="pip-2"></span>
+            </div>
+          </div>
+          <div id="challenge-active" class="challenge-active" hidden>
+            <p class="challenge-prompt">
+              <strong>Activity Timeline Challenge</strong><br/>
+              Your team has examined the evidence. As a group, discuss and agree
+              on the most important sequence of events that led to this situation.
+              When your team is ready, submit your reasoning to proceed.
+            </p>
+            <div class="reasoning-area">
+              <label for="team-reasoning">Team Reasoning Notes</label>
+              <textarea
+                id="team-reasoning"
+                placeholder="Summarize your team's reasoning here before submitting…"
+                rows="4"
+              ></textarea>
+            </div>
+            <button class="btn-primary" id="submit-challenge-btn">
+              Submit Reasoning &amp; Advance
+            </button>
+          </div>
+        </div>
+
+        <!-- Escalation Panel (facilitator-triggered) -->
+        <div class="panel escalation-panel escalation-hidden" id="escalation-panel">
+          <h2 class="panel-title">⚠️ Situation Update</h2>
+          <p id="escalation-text"></p>
+        </div>
+
       </div>
     </section>
+
+    <!-- Stage Footer -->
+    <footer class="stage-footer">
+      <span id="group-name-display" class="group-label"></span>
+      <span id="footer-clue-count" class="footer-stat">Evidence: 0 / 3</span>
+      <a href="../index.html" class="footer-restart">Restart Session</a>
+    </footer>
+
   </main>
+
+  <script type="module" src="../scripts/investigation.js"></script>
 </body>
 </html>

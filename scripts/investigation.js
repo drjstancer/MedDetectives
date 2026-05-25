@@ -20,6 +20,9 @@ const clueCounter = document.getElementById('clue-counter');
 const completionPanel = document.getElementById('completion-panel');
 const clueFeed = document.getElementById('participant-clue-feed');
 const discoveryFeed = document.getElementById('discovery-feed');
+const activationCard = document.getElementById('activation-card');
+const activationStatus = document.getElementById('activation-status');
+const activationTeamName = document.getElementById('activation-team-name');
 
 function renderDiscovery(discovery) {
   if (!discoveryFeed || !discovery) return;
@@ -31,6 +34,20 @@ function renderDiscovery(discovery) {
       <p>${discovery.content}</p>
     </article>
   `;
+}
+
+function activateLiveInvestigationCard(teamName) {
+  if (!activationCard) return;
+
+  activationCard.classList.add('live');
+
+  if (activationStatus) {
+    activationStatus.textContent = 'INVESTIGATION ACTIVE';
+  }
+
+  if (activationTeamName) {
+    activationTeamName.textContent = teamName;
+  }
 }
 
 function updateTimer() {
@@ -123,8 +140,11 @@ function advanceScenarioStage() {
 bindFormSubmission('#activation-form', (event) => {
   event.preventDefault();
 
-  const teamName = document.getElementById('teamName').value;
-  const sessionCode = document.getElementById('sessionCode').value;
+  const teamNameInput = document.getElementById('teamName');
+  const sessionCodeInput = document.getElementById('sessionCode');
+
+  const teamName = teamNameInput.value;
+  const sessionCode = sessionCodeInput.value;
 
   activateParticipantSession({
     teamName,
@@ -134,6 +154,11 @@ bindFormSubmission('#activation-form', (event) => {
   updateState({
     currentStage: 'stage-01-activation'
   });
+
+  teamNameInput.setAttribute('disabled', true);
+  sessionCodeInput.setAttribute('disabled', true);
+
+  activateLiveInvestigationCard(teamName);
 
   updateTimer();
 });

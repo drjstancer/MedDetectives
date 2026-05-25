@@ -11,6 +11,7 @@ import { getDiscoveryById } from '../engine/discoveryRegistry.js';
 import { validateInvestigationPin } from '../engine/pinValidator.js';
 import { startQrScanner } from '../engine/qrScanner.js';
 import { qrDiscoveryMap } from '../content/qr/qrDiscoveryMap.js';
+import { canAccessDiscovery } from '../engine/progressionLocks.js';
 import {
   bindButtonAction,
   bindFormSubmission
@@ -26,6 +27,16 @@ const qrVideo = document.getElementById('qr-video');
 const qrShell = document.getElementById('qr-scanner-shell');
 let timerLoop = null;
 
+function renderFeedCard({ category, title, content }) {
+  discoveryFeed.innerHTML += `
+    <article class="participant-discovery-card">
+      <span>${category}</span>
+      <h3>${title}</h3>
+      <p>${content}</p>
+    </article>
+  `;
+}
+
 function renderDiscovery(discovery) {
   if (!discoveryFeed || !discovery) return;
 
@@ -33,13 +44,11 @@ function renderDiscovery(discovery) {
   const discoveries = state.discoveries || [];
 
   if (discoveries.includes(discovery.id)) {
-    discoveryFeed.innerHTML += `
-      <article class="participant-discovery-card">
-        <span>Duplicate Discovery</span>
-        <h3>Evidence Already Reviewed</h3>
-        <p>Your team has already analyzed this artifact.</p>
-      </article>
-    `;
+    renderFeedCard({
+      category: 'Duplicate Discovery',
+      title: 'Evidence Already Reviewed',
+      content: 'Your team has already analyzed this artifact.'
+    });
 
     return;
   }
@@ -48,13 +57,11 @@ function renderDiscovery(discovery) {
     discoveries: [...discoveries, discovery.id]
   });
 
-  discoveryFeed.innerHTML += `
-    <article class="participant-discovery-card">
-      <span>${discovery.category}</span>
-      <h3>${discovery.title}</h3>
-      <p>${discovery.content}</p>
-    </article>
-  `;
+  renderFeedCard({
+    category: discovery.category,
+    title: discovery.title,
+    content: discovery.content
+  });
 }
 
 function activateLiveInvestigationCard(teamName) {
@@ -115,13 +122,11 @@ function advanceScenarioStage() {
   );
 
   if (!ready) {
-    discoveryFeed.innerHTML += `
-      <article class="participant-discovery-card">
-        <span>Reasoning Checkpoint</span>
-        <h3>Additional Evidence Required</h3>
-        <p>Your team must locate more physical evidence before progressing.</p>
-      </article>
-    `;
+    renderFeedCard({
+      category: 'Reasoning Checkpoint',
+      title: 'Additional Evidence Required',
+      content: 'Your team must locate more physical evidence before progressing.'
+    });
 
     return;
   }
@@ -137,13 +142,11 @@ function advanceScenarioStage() {
     currentStage: nextStage
   });
 
-  discoveryFeed.innerHTML += `
-    <article class="participant-discovery-card">
-      <span>Stage Progression</span>
-      <h3>New Investigation Phase</h3>
-      <p>${nextStage}</p>
-    </article>
-  `;
+  renderFeedCard({
+    category: 'Stage Progression',
+    title: 'New Investigation Phase',
+    content: nextStage
+  });
 }
 
 bindFormSubmission('#activation-form', (event) => {
@@ -180,17 +183,36 @@ bindButtonAction('#scan-qr-btn', async () => {
   await startQrScanner({
     videoElement: qrVideo,
     onDiscovery: (value) => {
+      const currentStage = getState().currentStage;
+
+      const allowed = canAccessDiscovery({
+        currentStage,
+        uri: value
+      });
+
+      if (!allowed) {
+        renderFeedCard({
+          category: 'Locked Evidence',
+          title: 'Discovery Not Yet Available',
+          content: 'Your team has not progressed far enough to interpret this artifact.'
+        });
+
+        if (qrShell) {
+          qrShell.style.display = 'none';
+        }
+
+        return;
+      }
+
       const discoveryId = qrDiscoveryMap[value] || value;
       const discovery = getDiscoveryById(discoveryId);
 
       if (!discovery) {
-        discoveryFeed.innerHTML += `
-          <article class="participant-discovery-card">
-            <span>Scan Error</span>
-            <h3>Unknown Artifact</h3>
-            <p>The scanned QR code does not match an investigation artifact.</p>
-          </article>
-        `;
+        renderFeedCard({
+          category: 'Scan Error',
+          title: 'Unknown Artifact',
+          content: 'The scanned QR code does not match an investigation artifact.'
+        });
 
         if (qrShell) {
           qrShell.style.display = 'none';
@@ -213,13 +235,11 @@ bindButtonAction('#pin-submit-btn', () => {
   const result = validateInvestigationPin(pinInput?.value || '');
 
   if (!result.valid) {
-    discoveryFeed.innerHTML += `
-      <article class="participant-discovery-card">
-        <span>Access PIN</span>
-        <h3>Evidence Still Incomplete</h3>
-        <p>${result.message}</p>
-      </article>
-    `;
+    renderFeedCard({
+      category: 'Access PIN',
+      title: 'Evidence Still Incomplete',
+      content: result.message
+    });
 
     return;
   }

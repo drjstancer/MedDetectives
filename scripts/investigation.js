@@ -4,7 +4,6 @@ import {
   activateParticipantSession,
   formatRemainingTime,
   getRemainingMilliseconds,
-  requestClue,
   markForfeit
 } from '../engine/sessionRuntime.js';
 import { ProgressionMap } from '../engine/progressionMap.js';
@@ -23,9 +22,19 @@ const discoveryFeed = document.getElementById('discovery-feed');
 const activationCard = document.getElementById('activation-card');
 const activationStatus = document.getElementById('activation-status');
 const activationTeamName = document.getElementById('activation-team-name');
+let timerLoop = null;
 
 function renderDiscovery(discovery) {
   if (!discoveryFeed || !discovery) return;
+
+  const state = getState();
+  const discoveries = state.discoveries || [];
+
+  if (!discoveries.includes(discovery.type)) {
+    updateState({
+      discoveries: [...discoveries, discovery.type]
+    });
+  }
 
   discoveryFeed.innerHTML += `
     <article class="participant-discovery-card">
@@ -51,9 +60,7 @@ function activateLiveInvestigationCard(teamName) {
 }
 
 function updateTimer() {
-  if (!timerElement) {
-    return;
-  }
+  if (!timerElement) return;
 
   const remaining = getRemainingMilliseconds();
 
@@ -66,10 +73,19 @@ function updateTimer() {
   if (remaining <= 0) {
     timerElement.textContent = '00:00';
     markForfeit('Time expired before scenario completion.');
+    clearInterval(timerLoop);
   }
 }
 
+function startTimerLoop() {
+  clearInterval(timerLoop);
+  updateTimer();
+  timerLoop = setInterval(updateTimer, 1000);
+}
+
 function updateClueCounter() {
+  if (!clueCounter) return;
+
   const state = getState();
   const remaining = 3 - (state.cluesUsed || 0);
 
@@ -115,26 +131,36 @@ function completeScenario() {
 function advanceScenarioStage() {
   const state = getState();
   const currentStage = state.currentStage || 'stage-01-activation';
-
   const progression = ProgressionMap[currentStage];
 
-  if (!progression || !progression.unlocks.length) {
-    completeScenario();
+  if (!progression) return;
+
+  const discoveries = state.discoveries || [];
+  const ready = (progression.requiredDiscoveries || []).every((required) =>
+    discoveries.includes(required)
+  );
+
+  if (!ready) {
+    if (discoveryFeed) {
+      discoveryFeed.innerHTML += `
+        <article class="participant-discovery-card">
+          <span>Reasoning Checkpoint</span>
+          <h3>More Evidence Needed</h3>
+          <p>Your team should gather and interpret more evidence before advancing.</p>
+        </article>
+      `;
+    }
     return;
   }
 
-  const nextStage = progression.unlocks[0];
-
-  if (nextStage === 'final-synthesis') {
+  if (!progression.unlocks.length) {
     completeScenario();
     return;
   }
 
   updateState({
-    currentStage: nextStage
+    currentStage: progression.unlocks[0]
   });
-
-  console.log(`Stage Updated: ${nextStage}`);
 }
 
 bindFormSubmission('#activation-form', (event) => {
@@ -159,28 +185,32 @@ bindFormSubmission('#activation-form', (event) => {
   sessionCodeInput.setAttribute('disabled', true);
 
   activateLiveInvestigationCard(teamName);
-
-  updateTimer();
+  startTimerLoop();
 });
 
 bindButtonAction('#scan-qr-btn', () => {
   const discovery = getDiscoveryById('qr-01');
-
   renderDiscovery(discovery);
 });
 
 bindButtonAction('#pin-submit-btn', () => {
   const pinInput = document.getElementById('access-pin-input');
-
   const result = validateInvestigationPin(pinInput?.value || '');
 
   if (!result.valid) {
-    console.log(result.message);
+    if (discoveryFeed) {
+      discoveryFeed.innerHTML += `
+        <article class="participant-discovery-card">
+          <span>Access PIN</span>
+          <h3>Evidence Still Incomplete</h3>
+          <p>${result.message}</p>
+        </article>
+      `;
+    }
     return;
   }
 
   const discovery = getDiscoveryById(result.discoveryId);
-
   renderDiscovery(discovery);
 });
 
@@ -198,6 +228,5 @@ window.addEventListener('visibilitychange', () => {
 updateClueCounter();
 updateTimer();
 renderParticipantClues();
-setInterval(updateTimer, 1000);
 
 console.log('investigation', getState());

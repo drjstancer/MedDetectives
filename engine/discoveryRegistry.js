@@ -1,11 +1,11 @@
-import discoveries from '../content/discoveries/jordan-carter-discoveries.json' assert { type: 'json' };
+import { jordanCarterDiscoveries } from '../content/discoveries/jordanCarterDiscoveries.js';
 
 export function getDiscoveryById(id) {
-  return discoveries.discoveries.find(
+  return jordanCarterDiscoveries.find(
     (discovery) => discovery.id === id
   );
 }
 
 export function getAllDiscoveries() {
-  return discoveries.discoveries;
+  return jordanCarterDiscoveries;
 }

@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Investigation Session</title>
   <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/sessionActivation.css" />
+  <link rel="stylesheet" href="../styles/evidenceBoard.css" />
+  <link rel="stylesheet" href="../styles/discoveryTimeline.css" />
 </head>
 <body>
   <main class="session-shell">
@@ -21,8 +24,16 @@
       </div>
     </section>
 
-    <section class="portal-card">
+    <section class="portal-card activation-live-card" id="activation-card">
       <p class="eyebrow">Scenario Activation</p>
+
+      <div id="activation-status" class="activation-status">
+        Awaiting Activation
+      </div>
+
+      <div id="activation-team-name" class="activation-team-name">
+        ---
+      </div>
 
       <form id="activation-form">
         <label for="teamName">Team Name</label>
@@ -47,16 +58,22 @@
           Explore physical evidence, scan QR discoveries, and investigate emerging clues.
         </p>
 
-        <button id="scan-btn" class="primary-button">
+        <button id="scan-qr-btn" class="primary-button">
           Scan QR Discovery
         </button>
 
-        <button id="pin-btn" class="secondary-button">
-          Enter Access PIN
-        </button>
+        <div style="margin-top:1rem;">
+          <input
+            id="access-pin-input"
+            placeholder="Enter Access PIN"
+          />
 
-        <div id="discovery-results" class="empty-state">
-          No discoveries activated yet.
+          <button id="pin-submit-btn" class="secondary-button">
+            Unlock Evidence
+          </button>
+        </div>
+
+        <div id="discovery-feed" class="evidence-board-grid" style="margin-top:1.5rem;">
         </div>
       </article>
 
@@ -89,22 +106,6 @@
             Submit Team Reasoning
           </button>
         </form>
-      </article>
-
-      <article class="portal-card">
-        <p class="eyebrow">Facilitator Support</p>
-
-        <h2>Clue Requests</h2>
-
-        <p id="clue-counter">Clues Remaining: 3</p>
-
-        <button id="clue-btn" class="primary-button">
-          Request Clue
-        </button>
-
-        <div id="received-clues" class="empty-state">
-          No clues received.
-        </div>
       </article>
     </section>
 

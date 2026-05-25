@@ -9,6 +9,7 @@ import {
 import { ProgressionMap } from '../engine/progressionMap.js';
 import { getDiscoveryById } from '../engine/discoveryRegistry.js';
 import { validateInvestigationPin } from '../engine/pinValidator.js';
+import { startQrScanner } from '../engine/qrScanner.js';
 import {
   bindButtonAction,
   bindFormSubmission
@@ -22,6 +23,8 @@ const discoveryFeed = document.getElementById('discovery-feed');
 const activationCard = document.getElementById('activation-card');
 const activationStatus = document.getElementById('activation-status');
 const activationTeamName = document.getElementById('activation-team-name');
+const qrVideo = document.getElementById('qr-video');
+const qrShell = document.getElementById('qr-scanner-shell');
 let timerLoop = null;
 
 function renderDiscovery(discovery) {
@@ -158,9 +161,21 @@ function advanceScenarioStage() {
     return;
   }
 
+  const nextStage = progression.unlocks[0];
+
   updateState({
-    currentStage: progression.unlocks[0]
+    currentStage: nextStage
   });
+
+  if (discoveryFeed) {
+    discoveryFeed.innerHTML += `
+      <article class="participant-discovery-card">
+        <span>Investigation Progression</span>
+        <h3>New Stage Unlocked</h3>
+        <p>${nextStage}</p>
+      </article>
+    `;
+  }
 }
 
 bindFormSubmission('#activation-form', (event) => {
@@ -188,9 +203,23 @@ bindFormSubmission('#activation-form', (event) => {
   startTimerLoop();
 });
 
-bindButtonAction('#scan-qr-btn', () => {
-  const discovery = getDiscoveryById('qr-01');
-  renderDiscovery(discovery);
+bindButtonAction('#scan-qr-btn', async () => {
+  if (qrShell) {
+    qrShell.style.display = 'block';
+  }
+
+  await startQrScanner({
+    videoElement: qrVideo,
+    onDiscovery: (value) => {
+      const discovery = getDiscoveryById(value);
+
+      renderDiscovery(discovery);
+
+      if (qrShell) {
+        qrShell.style.display = 'none';
+      }
+    }
+  });
 });
 
 bindButtonAction('#pin-submit-btn', () => {

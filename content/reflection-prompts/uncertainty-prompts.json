@@ -1,0 +1,21 @@
+{
+  "category": "uncertainty-processing",
+  "prompts": [
+    {
+      "id": "uncertainty-01",
+      "prompt": "What evidence currently feels strongest to your group, and why?"
+    },
+    {
+      "id": "uncertainty-02",
+      "prompt": "Which interpretation could also reasonably fit the evidence?"
+    },
+    {
+      "id": "uncertainty-03",
+      "prompt": "What assumptions might your group be making without realizing it?"
+    },
+    {
+      "id": "uncertainty-04",
+      "prompt": "What unanswered question would most strengthen your interpretation if resolved?"
+    }
+  ]
+}

@@ -7,12 +7,13 @@ import {
   markForfeit
 } from '../engine/sessionRuntime.js';
 import { ProgressionMap } from '../engine/progressionMap.js';
+import {
+  bindButtonAction,
+  bindFormSubmission
+} from '../engine/uiBindings.js';
 
 const timerElement = document.getElementById('countdown-timer');
 const clueCounter = document.getElementById('clue-counter');
-const activationForm = document.getElementById('activation-form');
-const clueButton = document.getElementById('clue-btn');
-const reasoningButton = document.getElementById('reasoning-btn');
 const completionPanel = document.getElementById('completion-panel');
 
 function updateTimer() {
@@ -77,7 +78,7 @@ function advanceScenarioStage() {
   alert(`Stage Updated: ${nextStage}`);
 }
 
-activationForm?.addEventListener('submit', (event) => {
+bindFormSubmission('#activation-form', (event) => {
   event.preventDefault();
 
   const teamName = document.getElementById('teamName').value;
@@ -97,7 +98,7 @@ activationForm?.addEventListener('submit', (event) => {
   alert('Scenario Activated');
 });
 
-clueButton?.addEventListener('click', () => {
+bindButtonAction('#clue-btn', () => {
   const result = requestClue();
 
   if (!result.accepted) {
@@ -110,7 +111,7 @@ clueButton?.addEventListener('click', () => {
   alert('Facilitator has been notified of your clue request.');
 });
 
-reasoningButton?.addEventListener('click', () => {
+bindButtonAction('#reasoning-btn', () => {
   advanceScenarioStage();
 });
 

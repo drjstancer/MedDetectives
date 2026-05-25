@@ -1,0 +1,30 @@
+{
+  "id": "jordan-carter-case",
+  "title": "The Jordan Carter Case",
+  "durationMinutes": 60,
+  "difficulty": "introductory collaborative reasoning",
+  "scenarioSummary": "Participants investigate conflicting evidence surrounding a student collapse during a campus leadership event.",
+  "learningGoals": [
+    "Collaborative reasoning",
+    "Evidence interpretation",
+    "Comfort with uncertainty",
+    "Communication under pressure"
+  ],
+  "stages": [
+    "stage-01-activation",
+    "stage-02-conflicting-narratives"
+  ],
+  "requiredPhysicalMaterials": [
+    "Evidence cards",
+    "Printed timeline fragments",
+    "QR discovery markers",
+    "Collaborative evidence board",
+    "Sticky notes",
+    "Facilitator clue envelopes"
+  ],
+  "facilitatorNotes": [
+    "Allow participants to struggle productively before offering clues.",
+    "Encourage collaborative interpretation instead of rapid guessing.",
+    "Use clue prompts to redirect reasoning rather than provide answers."
+  ]
+}

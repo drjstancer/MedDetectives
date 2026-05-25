@@ -4,29 +4,79 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Facilitator Dashboard</title>
-  <link rel="stylesheet" href="../style.css" />
+  <link rel="stylesheet" href="../styles/main.css" />
 </head>
 <body>
-  <main class="screen">
-    <section class="hero-panel">
-      <p class="status-tag">Facilitator View</p>
-      <h1>Session Control</h1>
-      <div class="mission-card">
-        <div id="connection-state">Connecting…</div>
-        <button id="refresh-btn">Refresh</button>
-        <button id="escalate-btn">Escalate</button>
-        <button id="reset-btn">Reset Session</button>
-      </div>
-      <div class="mission-card">
-        <h2>Live Session</h2>
-        <pre id="session-view"></pre>
-      </div>
-      <div class="mission-card">
-        <h2>Recent Events</h2>
-        <pre id="events-view"></pre>
-      </div>
+  <main class="portal-layout">
+    <section>
+      <p class="eyebrow">Facilitator Experience</p>
+      <h1>Scenario Coordination Dashboard</h1>
+
+      <p>
+        Prepare immersive learning environments and guide collaborative investigation.
+      </p>
+    </section>
+
+    <section class="portal-grid">
+      <article class="portal-card">
+        <p class="eyebrow">Scenario Prep</p>
+
+        <h2>Jordan Carter Case</h2>
+
+        <ul>
+          <li>Print evidence packet</li>
+          <li>Place QR markers in room zones</li>
+          <li>Prepare facilitator clue envelopes</li>
+          <li>Arrange collaborative evidence board</li>
+        </ul>
+
+        <button class="primary-button">
+          Print Prep Materials
+        </button>
+      </article>
+
+      <article class="portal-card">
+        <p class="eyebrow">Scenario Activation</p>
+
+        <h2>Activate Investigation Session</h2>
+
+        <p>Session Code</p>
+
+        <div class="timer">MD-4821</div>
+
+        <button class="primary-button">
+          Activate Scenario
+        </button>
+      </article>
+    </section>
+
+    <section class="snapshot-grid">
+      <article class="snapshot-card">
+        <h2>Session Timer</h2>
+        <p class="timer">58:42</p>
+      </article>
+
+      <article class="snapshot-card">
+        <h2>Current Stage</h2>
+        <p>Conflicting Narratives</p>
+      </article>
+
+      <article class="snapshot-card">
+        <h2>Clue Requests</h2>
+        <button class="secondary-button">
+          Send Clue
+        </button>
+      </article>
+
+      <article class="snapshot-card">
+        <h2>Facilitator Guidance</h2>
+        <p>
+          Encourage participants to revisit earlier evidence assumptions.
+        </p>
+      </article>
     </section>
   </main>
+
   <script type="module" src="../scripts/facilitator.js"></script>
 </body>
 </html>

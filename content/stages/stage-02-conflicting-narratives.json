@@ -1,0 +1,26 @@
+{
+  "id": "stage-02-conflicting-narratives",
+  "title": "Conflicting Narratives",
+  "description": "Participants encounter competing interpretations that require collaborative synthesis and evidence re-evaluation.",
+  "learningGoals": [
+    "Practice evidence comparison",
+    "Navigate collaborative disagreement",
+    "Develop comfort revising interpretations",
+    "Strengthen uncertainty tolerance"
+  ],
+  "requiredDiscoveries": [
+    "participant-journal",
+    "timeline-fragment",
+    "contradictory-observation"
+  ],
+  "facilitatorGuidance": {
+    "openingPrompt": "What evidence appears to conflict, and how might your group interpret those differences?",
+    "stallPrompt": "What earlier assumption may need to be reconsidered?",
+    "reflectionPrompt": "How did disagreement influence your group's reasoning process?"
+  },
+  "unlockConditions": {
+    "type": "discovery-threshold",
+    "minimumDiscoveries": 5
+  },
+  "nextStage": "stage-03-synthesis-under-pressure"
+}

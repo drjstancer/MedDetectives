@@ -1,0 +1,36 @@
+.activation-live-card {
+  background: linear-gradient(
+    145deg,
+    rgba(255,255,255,0.96),
+    rgba(244,233,220,0.92)
+  );
+
+  border-radius: 18px;
+  border: 1px solid rgba(122,75,31,0.2);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.12);
+  padding: 2rem;
+
+  transform-style: preserve-3d;
+  transition: transform 0.7s ease;
+}
+
+.activation-live-card.live {
+  transform: rotateY(180deg);
+}
+
+.activation-team-name {
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #5c3512;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.activation-status {
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #7a4b1f;
+  letter-spacing: 0.08em;
+}

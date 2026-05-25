@@ -1,0 +1,24 @@
+{
+  "stages": [
+    {
+      "id": "timeline-conflict",
+      "prompt": "Which interpretation currently feels MOST supported?",
+      "options": [
+        "Jordan’s distress escalated suddenly",
+        "Jordan showed subtle signs much earlier",
+        "Witness memories may be unreliable",
+        "The group may be overvaluing confidence cues"
+      ]
+    },
+    {
+      "id": "escalation-review",
+      "prompt": "Which evidence most challenges the group’s earlier assumptions?",
+      "options": [
+        "The contradictory witness statement",
+        "The hidden journal fragments",
+        "The reconstructed timeline",
+        "The escalation observation discovery"
+      ]
+    }
+  ]
+}

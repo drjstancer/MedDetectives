@@ -32,6 +32,8 @@ export function activateSharedSession() {
     code: generateSessionCode(),
     startTime: Date.now(),
     active: true,
+    pausedAt: null,
+    totalPausedDuration: 0,
     stage: STAGES[0],
     createdAt: new Date().toISOString()
   };
@@ -59,6 +61,18 @@ export function getActiveSession() {
 export function stopSharedSession() {
   mutateActiveSession(session => {
     session.active = false;
+    session.pausedAt = Date.now();
+  });
+}
+
+export function resumeSharedSession() {
+  mutateActiveSession(session => {
+    if (session.pausedAt) {
+      session.totalPausedDuration += Date.now() - session.pausedAt;
+    }
+
+    session.pausedAt = null;
+    session.active = true;
   });
 }
 
@@ -143,13 +157,19 @@ function syncDisplay(display) {
     return;
   }
 
-  const elapsed = Math.floor(
-    (Date.now() - activeSession.startTime) / 1000
-  );
+  let elapsed;
 
-  const hours = String(Math.floor(elapsed / 3600)).padStart(2, '0');
-  const minutes = String(Math.floor((elapsed % 3600) / 60)).padStart(2, '0');
-  const seconds = String(elapsed % 60).padStart(2, '0');
+  if (!activeSession.active && activeSession.pausedAt) {
+    elapsed = activeSession.pausedAt - activeSession.startTime - activeSession.totalPausedDuration;
+  } else {
+    elapsed = Date.now() - activeSession.startTime - activeSession.totalPausedDuration;
+  }
+
+  const secondsElapsed = Math.floor(elapsed / 1000);
+
+  const hours = String(Math.floor(secondsElapsed / 3600)).padStart(2, '0');
+  const minutes = String(Math.floor((secondsElapsed % 3600) / 60)).padStart(2, '0');
+  const seconds = String(secondsElapsed % 60).padStart(2, '0');
 
   display.textContent = `${hours}:${minutes}:${seconds}`;
 }

@@ -3,114 +3,72 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Facilitator Dashboard</title>
+
   <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/evidenceBoard.css" />
+  <link rel="stylesheet" href="../styles/immersiveEnvironment.css" />
 </head>
+
 <body>
-  <main class="portal-layout">
-    <section>
-      <p class="eyebrow">Facilitator Experience</p>
-      <h1>Scenario Coordination Dashboard</h1>
+  <div class="immersive-environment environment-pulse"></div>
 
-      <p>
-        Prepare immersive learning environments and guide collaborative investigation.
-      </p>
+  <main class="session-shell">
+
+    <section class="session-header">
+      <div>
+        <p class="eyebrow">Facilitator Dashboard</p>
+        <h1>MedDetectives Control Center</h1>
+        <p>Educational oversight and live intervention management.</p>
+      </div>
     </section>
 
-    <section class="portal-grid">
-      <article class="portal-card">
-        <p class="eyebrow">Scenario Prep</p>
+    <section class="portal-card">
+      <p class="eyebrow">Live Sessions</p>
+      <h2>Active Investigation Teams</h2>
 
-        <h2>Jordan Carter Case</h2>
-
-        <ul>
-          <li>Print evidence packet</li>
-          <li>Place QR markers in room zones</li>
-          <li>Prepare facilitator clue envelopes</li>
-          <li>Arrange collaborative evidence board</li>
-        </ul>
-
-        <a
-          id="print-prep-btn"
-          class="primary-button"
-          href="../content/printables/jordan-carter-evidence-packet.html"
-          target="_blank"
-        >
-          Open Printable Materials
-        </a>
-      </article>
-
-      <article class="portal-card">
-        <p class="eyebrow">Scenario Activation</p>
-
-        <h2>Activate Investigation Session</h2>
-
-        <p>Session Code</p>
-
-        <div class="timer" id="session-code-display">MD-0000</div>
-
-        <button id="activate-session-btn" class="primary-button">
-          Activate Scenario
-        </button>
-      </article>
+      <div
+        id="active-sessions-board"
+        class="evidence-board-grid"
+      ></div>
     </section>
 
-    <section class="portal-grid">
-      <article class="portal-card">
-        <p class="eyebrow">Investigation Progression</p>
+    <section class="portal-card">
+      <p class="eyebrow">Educational Interventions</p>
+      <h2>Escalation Controls</h2>
 
-        <h2>Stage Progression Map</h2>
-
-        <ol>
-          <li>Scenario Activation</li>
-          <li>Conflicting Narratives</li>
-          <li>Evidence Reconciliation</li>
-          <li>Final Synthesis</li>
-        </ol>
-      </article>
-
-      <article class="portal-card">
-        <p class="eyebrow">Facilitator Guidance</p>
-
-        <h2>Current Facilitation Focus</h2>
-
-        <div id="facilitator-guidance-panel">
-          Encourage participants to compare conflicting witness perspectives before requesting a clue.
-        </div>
-      </article>
+      <div
+        id="intervention-board"
+        class="evidence-board-grid"
+      ></div>
     </section>
 
-    <section class="snapshot-grid">
-      <article class="snapshot-card">
-        <h2>Session Timer</h2>
-        <p class="timer" id="facilitator-timer">60:00</p>
-      </article>
+    <section class="portal-card">
+      <p class="eyebrow">Competency Tracking</p>
+      <h2>Learning Outcomes Monitoring</h2>
 
-      <article class="snapshot-card">
-        <h2>Current Stage</h2>
-        <p id="current-stage-display">Scenario Activation</p>
-      </article>
-
-      <article class="snapshot-card">
-        <h2>Clue Requests</h2>
-
-        <select id="clue-select">
-          <option value="timeline">Timeline Tension</option>
-          <option value="observation">Observation Conflict</option>
-          <option value="synthesis">Reasoning Synthesis</option>
-        </select>
-
-        <button id="send-clue-btn" class="secondary-button">
-          Send Clue
-        </button>
-
-        <div id="used-clues" class="empty-state">
-          No clues sent.
-        </div>
-      </article>
+      <div
+        id="competency-board"
+        class="evidence-board-grid"
+      ></div>
     </section>
+
+    <section class="portal-card">
+      <p class="eyebrow">Reflection Feed</p>
+      <h2>Participant Debrief Data</h2>
+
+      <div
+        id="reflection-board"
+        class="evidence-board-grid"
+      ></div>
+    </section>
+
   </main>
 
-  <script type="module" src="../scripts/facilitator.js"></script>
+  <script
+    type="module"
+    src="../scripts/facilitatorDashboard.js"
+  ></script>
 </body>
 </html>

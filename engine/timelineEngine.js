@@ -1,21 +1,29 @@
-export const timelineEvents = [
-  {
-    id: 'timeline-01',
-    timestamp: '3 Days Before Incident',
-    summary: 'Jordan reportedly skipped multiple meals while preparing for presentations.'
-  },
-  {
-    id: 'timeline-02',
-    timestamp: '2 Days Before Incident',
-    summary: 'Witness reports increasing irritability and visible exhaustion.'
-  },
-  {
-    id: 'timeline-03',
-    timestamp: 'Night of Incident',
-    summary: 'Jordan experienced physiological and emotional escalation during group planning session.'
-  }
+export const roomTimelineSequence = [
+  'CARD-A',
+  'CARD-D',
+  'CARD-B',
+  'CARD-C'
 ];
 
-export function getTimelineEvents() {
-  return timelineEvents;
+export const timelineRoomInstructions = {
+  title: 'Room Timeline Assembly',
+  instruction: 'Assemble the printed timeline fragments in the physical room first. Use this digital checkpoint only after your team agrees on the order.',
+  roomFirst: true
+};
+
+export function checkRoomTimeline(sequence = []) {
+  const normalized = sequence.map((item) => item.trim().toUpperCase());
+
+  const correct = roomTimelineSequence.every((card, index) =>
+    normalized[index] === card
+  );
+
+  return {
+    correct,
+    expectedCount: roomTimelineSequence.length,
+    submittedCount: normalized.length,
+    message: correct
+      ? 'Timeline checkpoint confirmed. Continue the investigation.'
+      : 'Timeline checkpoint not confirmed. Return to the room materials and reassess the order.'
+  };
 }

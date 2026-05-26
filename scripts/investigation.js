@@ -14,6 +14,10 @@ import { qrDiscoveryMap } from '../content/qr/qrDiscoveryMap.js';
 import { canAccessDiscovery } from '../engine/progressionLocks.js';
 import { getConnectedEvidence } from '../engine/evidenceConnections.js';
 import {
+  initializeSessionTelemetry,
+  updateSessionTelemetry
+} from '../engine/sessionTelemetry.js';
+import {
   bindButtonAction,
   bindFormSubmission
 } from '../engine/uiBindings.js';
@@ -27,6 +31,7 @@ const activationTeamName = document.getElementById('activation-team-name');
 const qrVideo = document.getElementById('qr-video');
 const qrShell = document.getElementById('qr-scanner-shell');
 let timerLoop = null;
+let activeSessionCode = null;
 
 function renderFeedCard({ category, title, content }) {
   discoveryFeed.innerHTML += `
@@ -36,6 +41,17 @@ function renderFeedCard({ category, title, content }) {
       <p>${content}</p>
     </article>
   `;
+}
+
+function syncTelemetry() {
+  if (!activeSessionCode) return;
+
+  const state = getState();
+
+  updateSessionTelemetry(activeSessionCode, {
+    currentStage: state.currentStage,
+    discoveries: state.discoveries || []
+  });
 }
 
 function renderEvidenceConnections(discoveryId) {
@@ -66,9 +82,13 @@ function renderDiscovery(discovery) {
     return;
   }
 
+  const updatedDiscoveries = [...discoveries, discovery.id];
+
   updateState({
-    discoveries: [...discoveries, discovery.id]
+    discoveries: updatedDiscoveries
   });
+
+  syncTelemetry();
 
   renderFeedCard({
     category: discovery.category,
@@ -118,6 +138,8 @@ function completeScenario() {
     sessionStatus: 'completed'
   });
 
+  syncTelemetry();
+
   if (completionPanel) {
     completionPanel.style.display = 'block';
   }
@@ -157,6 +179,8 @@ function advanceScenarioStage() {
     currentStage: nextStage
   });
 
+  syncTelemetry();
+
   renderFeedCard({
     category: 'Stage Progression',
     title: 'New Investigation Phase',
@@ -173,6 +197,13 @@ bindFormSubmission('#activation-form', (event) => {
   const teamName = teamNameInput.value;
   const sessionCode = sessionCodeInput.value;
 
+  activeSessionCode = sessionCode;
+
+  initializeSessionTelemetry({
+    sessionCode,
+    teamName
+  });
+
   activateParticipantSession({
     teamName,
     sessionCode
@@ -182,6 +213,8 @@ bindFormSubmission('#activation-form', (event) => {
     currentStage: 'stage-01-activation',
     discoveries: []
   });
+
+  syncTelemetry();
 
   teamNameInput.setAttribute('disabled', true);
   sessionCodeInput.setAttribute('disabled', true);

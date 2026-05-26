@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Investigation Session</title>
+  <title>MedDetectives Investigation</title>
+
   <link rel="stylesheet" href="../styles/main.css" />
   <link rel="stylesheet" href="../styles/sessionActivation.css" />
   <link rel="stylesheet" href="../styles/evidenceBoard.css" />
@@ -14,11 +15,14 @@
   <div class="immersive-environment environment-pulse"></div>
 
   <main class="session-shell">
+
     <section class="session-header">
       <div>
         <p class="eyebrow">Active Investigation</p>
         <h1>The Jordan Carter Case</h1>
-        <p>Collaborative reasoning under pressure.</p>
+        <p>
+          Collaborative clinical reasoning under uncertainty.
+        </p>
       </div>
 
       <div>
@@ -28,30 +32,19 @@
     </section>
 
     <section class="portal-card activation-live-card" id="activation-card">
-      <p class="eyebrow">Active Investigation Briefing</p>
+      <p class="eyebrow">Investigation Briefing</p>
 
       <h2>Jordan Carter — Escalation Reconstruction</h2>
 
       <p>
-        Jordan Carter, a second-year Biological Sciences student and highly involved campus leader,
-        experienced a major emotional and physiological escalation event during a late-night collaborative planning session.
+        Jordan Carter experienced a major emotional and physiological escalation event during a late-night collaborative planning session.
       </p>
 
       <p>
-        Multiple witnesses reported subtle behavioral shifts in the weeks leading up to the incident,
-        but their interpretations conflict. Some described Jordan as focused and composed.
-        Others noticed emotional withdrawal, exhaustion, perfectionism, and increasing frustration.
-      </p>
-
-      <p>
-        Your investigative team has been tasked with reconstructing the evolving timeline,
-        analyzing contradictory observations, and determining what warning signs may have been overlooked.
-      </p>
-
-      <p>
-        This is not a criminal investigation.
-        Your role is to collaboratively synthesize evidence, interpret uncertainty,
-        and evaluate how different people understood the same events in different ways.
+        Witness interpretations conflict.
+        Physical evidence appears incomplete.
+        Your team must reconstruct what happened while managing uncertainty,
+        competing interpretations, and evolving evidence.
       </p>
 
       <div id="activation-status" class="activation-status">
@@ -76,63 +69,15 @@
     </section>
 
     <section class="portal-card">
-      <p class="eyebrow">Clinical Reasoning Workspace</p>
+      <p class="eyebrow">Working Clinical Hypotheses</p>
 
-      <h2>Working Clinical Hypotheses</h2>
+      <h2>Evolving Interpretations</h2>
 
       <p>
-        Your team should continuously update, challenge, and revise possible explanations as new evidence emerges.
+        Strong teams revise interpretations as evidence changes.
       </p>
 
       <div id="hypothesis-board" class="evidence-board-grid"></div>
-    </section>
-
-    <section class="portal-card">
-      <p class="eyebrow">Collaborative Annotation Workspace</p>
-
-      <h2>Evidence Annotation & Interpretation Mapping</h2>
-
-      <p>
-        Clinical reasoning improves when teams actively annotate contradictions, uncertainty, and confidence shifts.
-      </p>
-
-      <div id="annotation-board" class="evidence-board-grid"></div>
-    </section>
-
-    <section class="portal-card">
-      <p class="eyebrow">Collaborative Reasoning Logs</p>
-
-      <h2>Team Reflection & Documentation</h2>
-
-      <p>
-        Strong clinical reasoning includes documenting uncertainty, interpretation shifts, and evolving evidence analysis.
-      </p>
-
-      <div id="reasoning-log-board" class="evidence-board-grid"></div>
-    </section>
-
-    <section class="portal-card">
-      <p class="eyebrow">Cognitive Bias Reflection</p>
-
-      <h2>Reasoning Bias Awareness</h2>
-
-      <p>
-        Effective clinical reasoning requires teams to recognize how assumptions and cognitive shortcuts shape interpretation.
-      </p>
-
-      <div id="bias-awareness-board" class="evidence-board-grid"></div>
-    </section>
-
-    <section class="portal-card">
-      <p class="eyebrow">Clinical Indicators</p>
-
-      <h2>Physiological & Behavioral Findings</h2>
-
-      <p>
-        Interpret evolving clinical indicators carefully. Not all findings point toward a single explanation.
-      </p>
-
-      <div id="clinical-indicators-board" class="evidence-board-grid"></div>
     </section>
 
     <section class="portal-card">
@@ -141,28 +86,29 @@
       <h2>Evolving Sequence of Events</h2>
 
       <p>
-        Organize, challenge, and reinterpret the evolving timeline as new evidence emerges.
+        Reconstruct the event sequence while identifying contradictions and uncertainty.
       </p>
 
       <div id="timeline-board" class="evidence-board-grid"></div>
     </section>
 
     <section class="portal-card">
-      <p class="eyebrow">Collaborative Evidence Synthesis</p>
+      <p class="eyebrow">Evidence Synthesis</p>
 
-      <h2>Dynamic Investigation Board</h2>
+      <h2>Connected Evidence</h2>
 
       <div id="evidence-relationship-board" class="evidence-board-grid"></div>
     </section>
 
     <section class="synthesis-board">
+
       <article class="portal-card">
         <p class="eyebrow">Discovery Tools</p>
 
-        <h2>Active Investigation Tools</h2>
+        <h2>Investigation Actions</h2>
 
         <p>
-          Explore physical evidence, scan QR discoveries, and investigate emerging clues.
+          Scan evidence, unlock artifacts, and uncover conflicting interpretations.
         </p>
 
         <button id="scan-qr-btn" class="primary-button">
@@ -177,6 +123,7 @@
             playsinline
             style="width:100%;border-radius:14px;"
           ></video>
+
           <canvas id="qr-canvas" style="display:none;"></canvas>
         </div>
 
@@ -191,61 +138,69 @@
           </button>
         </div>
 
-        <div id="discovery-feed" class="evidence-board-grid" style="margin-top:1.5rem;">
-        </div>
+        <div
+          id="discovery-feed"
+          class="evidence-board-grid"
+          style="margin-top:1.5rem;"
+        ></div>
       </article>
 
       <article class="portal-card">
-        <p class="eyebrow">Collaborative Reasoning</p>
+        <p class="eyebrow">Team Decision Point</p>
 
-        <h2>Evidence Synthesis</h2>
+        <h2>Collaborative Reasoning</h2>
 
         <p>
           Select the interpretation your team currently believes is best supported.
+          New evidence may destabilize your reasoning later.
         </p>
 
         <form id="reasoning-form">
+
           <label>
             <input type="radio" name="reasoning" value="stress-response" />
-            Jordan experienced a stress-related medical episode during the event.
+            Jordan experienced a stress-related escalation event.
           </label>
 
           <label>
-            <input type="radio" name="reasoning" value="conflicting-account" />
-            Witness accounts are inconsistent because the timeline is incomplete.
+            <input type="radio" name="reasoning" value="physiological-event" />
+            Jordan experienced a physiological episode that was initially misinterpreted.
           </label>
 
           <label>
-            <input type="radio" name="reasoning" value="evidence-conflict" />
-            Physical evidence conflicts with at least one participant narrative.
+            <input type="radio" name="reasoning" value="incomplete-evidence" />
+            The evidence remains incomplete and further investigation is necessary.
           </label>
 
-          <button type="submit" id="reasoning-btn" class="secondary-button">
+          <button
+            type="submit"
+            id="reasoning-btn"
+            class="secondary-button"
+          >
             Submit Team Reasoning
           </button>
         </form>
       </article>
+
     </section>
 
     <section class="portal-card" id="completion-panel" style="display:none;">
       <p class="eyebrow">Scenario Complete</p>
 
-      <h2>Collaborative Investigation Complete</h2>
+      <h2>Investigation Complete</h2>
 
       <p>
-        Your team successfully navigated the investigation. Prepare for facilitator-led reflection and debrief.
+        Prepare for facilitator-led clinical reasoning debrief.
       </p>
     </section>
+
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+
   <script type="module" src="../scripts/investigation.js"></script>
   <script type="module" src="../scripts/timelineBoard.js"></script>
   <script type="module" src="../scripts/hypothesisBoard.js"></script>
-  <script type="module" src="../scripts/clinicalIndicatorsBoard.js"></script>
-  <script type="module" src="../scripts/cognitiveBiasBoard.js"></script>
-  <script type="module" src="../scripts/reasoningLogBoard.js"></script>
   <script type="module" src="../scripts/evidenceRelationshipBoard.js"></script>
-  <script type="module" src="../scripts/collaborativeAnnotationBoard.js"></script>
 </body>
 </html>

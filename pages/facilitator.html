@@ -27,11 +27,63 @@
     </section>
 
     <section class="portal-card">
+      <p class="eyebrow">Session Control</p>
+      <h2>Activate Investigation Session</h2>
+
+      <div class="evidence-board-grid">
+
+        <article class="participant-discovery-card">
+          <span>Session Activation</span>
+
+          <h3>Jordan Carter Investigation</h3>
+
+          <p>
+            Activate the room investigation, begin progression tracking,
+            and initialize escalation pacing.
+          </p>
+
+          <button class="primary-button" id="activate-session-button">
+            Activate Session
+          </button>
+        </article>
+
+        <article class="participant-discovery-card">
+          <span>Session Status</span>
+
+          <h3>Live Investigation Timer</h3>
+
+          <p id="session-timer-display">
+            00:00:00
+          </p>
+
+          <button class="secondary-button" id="start-timer-button">
+            Start Timer
+          </button>
+        </article>
+
+        <article class="participant-discovery-card">
+          <span>Stage Progression</span>
+
+          <h3>Current Investigation Stage</h3>
+
+          <p id="current-stage-display">
+            orientation
+          </p>
+
+          <button
+            class="secondary-button"
+            onclick="window.updateUrgencyBanner?.('timeline-conflict')"
+          >
+            Advance Stage
+          </button>
+        </article>
+
+      </div>
+    </section>
+
+    <section class="portal-card">
       <p class="eyebrow">Active Teams</p>
       <h2>Live Investigation Dynamics</h2>
-      <p>
-        Monitor team stage, confidence state, and unresolved contradictions without taking authority away from the room.
-      </p>
 
       <div
         id="facilitator-live-monitor"
@@ -42,9 +94,6 @@
     <section class="portal-card">
       <p class="eyebrow">Room Escalation</p>
       <h2>Environmental Pacing Controls</h2>
-      <p>
-        Use these controls to shape tension, not to solve the case for students.
-      </p>
 
       <div
         id="facilitator-environmental-controls"
@@ -53,20 +102,44 @@
     </section>
 
     <section class="portal-card">
+      <p class="eyebrow">Environmental Transition Guidance</p>
+      <h2>Room-State Modulation</h2>
+
+      <div
+        id="live-room-state-panel"
+        class="evidence-board-grid"
+      ></div>
+    </section>
+
+    <section class="portal-card">
+      <p class="eyebrow">Audio Escalation</p>
+      <h2>Atmospheric Audio Guidance</h2>
+
+      <div
+        id="audio-escalation-panel"
+        class="evidence-board-grid"
+      ></div>
+    </section>
+
+    <section class="portal-card">
+      <p class="eyebrow">Facilitator Guidance</p>
+      <h2>Intervention Recommendations</h2>
+
+      <div
+        id="facilitator-intervention-panel"
+        class="evidence-board-grid"
+      ></div>
+    </section>
+
+    <section class="portal-card">
       <p class="eyebrow">Destabilization Controls</p>
       <h2>Release Contradictions Strategically</h2>
-      <p>
-        Trigger these only when a team needs new uncertainty, assumption disruption, or evidence-based redirection.
-      </p>
 
       <div class="evidence-board-grid">
 
         <article class="participant-discovery-card">
           <span>Facilitator Trigger</span>
           <h3>Witness Memory Conflict</h3>
-          <p>
-            Release evidence suggesting a confident witness may have reconstructed events inaccurately.
-          </p>
 
           <button
             class="secondary-button"
@@ -79,9 +152,6 @@
         <article class="participant-discovery-card">
           <span>Facilitator Trigger</span>
           <h3>Timestamp Contradiction</h3>
-          <p>
-            Reveal timing evidence that destabilizes the team's current sequence of events.
-          </p>
 
           <button
             class="secondary-button"
@@ -94,9 +164,6 @@
         <article class="participant-discovery-card">
           <span>Facilitator Trigger</span>
           <h3>Overlooked Outreach Signal</h3>
-          <p>
-            Release overlooked communication evidence that reframes Jordan's emotional trajectory.
-          </p>
 
           <button
             class="secondary-button"
@@ -110,18 +177,24 @@
     </section>
 
     <section class="portal-card">
-      <p class="eyebrow">Facilitator Guardrail</p>
-      <h2>Do Not Over-Facilitate</h2>
-      <p>
-        The physical room remains the authority. Use the digital layer to pace, validate, destabilize, and support reflection.
-        Do not explain the case, diagnose Jordan, or rescue teams from productive uncertainty.
-      </p>
+      <p class="eyebrow">Debrief Export</p>
+      <h2>Collaborative Reasoning Synthesis</h2>
+
+      <div
+        id="debrief-export-panel"
+        class="evidence-board-grid"
+      ></div>
     </section>
 
   </main>
 
   <script type="module" src="../scripts/facilitatorLiveMonitor.js"></script>
+  <script type="module" src="../scripts/multiTeamMonitor.js"></script>
   <script type="module" src="../scripts/facilitatorEnvironmentalPanel.js"></script>
+  <script type="module" src="../scripts/liveRoomStatePanel.js"></script>
+  <script type="module" src="../scripts/audioEscalationPanel.js"></script>
+  <script type="module" src="../scripts/facilitatorInterventionPanel.js"></script>
   <script type="module" src="../scripts/liveDestabilizationFeed.js"></script>
+  <script type="module" src="../scripts/debriefExportPanel.js"></script>
 </body>
 </html>

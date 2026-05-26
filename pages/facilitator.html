@@ -82,7 +82,7 @@
 
     <section class="portal-card">
       <p class="eyebrow">Session Control</p>
-      <h2>Activate Investigation Session</h2>
+      <h2>Live Investigation Session Management</h2>
 
       <div class="evidence-board-grid">
 
@@ -93,6 +93,14 @@
           <button class="primary-button" id="activate-session-button">
             Activate Session
           </button>
+
+          <button class="secondary-button" id="stop-session-button" style="margin-top:.75rem;">
+            Stop Session
+          </button>
+
+          <button class="secondary-button" id="reset-session-button" style="margin-top:.75rem;">
+            Reset Session
+          </button>
         </article>
 
         <article class="participant-discovery-card">
@@ -101,6 +109,10 @@
 
           <p id="session-access-code-display" style="font-size:2rem;font-weight:bold;letter-spacing:.3rem;">
             ----
+          </p>
+
+          <p>
+            Participants enter this code to join the active live investigation.
           </p>
         </article>
 
@@ -121,9 +133,22 @@
             orientation
           </p>
 
-          <button class="secondary-button" onclick="window.updateUrgencyBanner?.('timeline-conflict')">
+          <p>
+            Advance stages when participant reasoning shifts, contradictions destabilize certainty, and collaborative interpretation evolves.
+          </p>
+
+          <button class="secondary-button" id="advance-stage-button">
             Advance Stage
           </button>
+        </article>
+
+        <article class="participant-discovery-card">
+          <span>Multi-Session Monitoring</span>
+          <h3>Active Investigation Sessions</h3>
+
+          <div id="multi-session-display">
+            No active sessions.
+          </div>
         </article>
 
       </div>

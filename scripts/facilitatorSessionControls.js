@@ -2,6 +2,7 @@ import {
   initializeSharedSessionTimer,
   activateSharedSession,
   stopSharedSession,
+  resumeSharedSession,
   resetSharedSession,
   advanceSharedSessionStage,
   getCurrentSharedSessionStage,
@@ -13,6 +14,7 @@ import {
 
 const activateButton = document.getElementById('activate-session-button');
 const stopButton = document.getElementById('stop-session-button');
+const resumeButton = document.getElementById('resume-session-button');
 const resetButton = document.getElementById('reset-session-button');
 const advanceButton = document.getElementById('advance-stage-button');
 
@@ -76,6 +78,11 @@ activateButton?.addEventListener('click', () => {
 
 stopButton?.addEventListener('click', () => {
   stopSharedSession();
+  syncDashboardState();
+});
+
+resumeButton?.addEventListener('click', () => {
+  resumeSharedSession();
   syncDashboardState();
 });
 

@@ -4,22 +4,105 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Facilitator Live Monitor</title>
+
   <link rel="stylesheet" href="../styles/main.css" />
+  <link rel="stylesheet" href="../styles/evidenceBoard.css" />
+  <link rel="stylesheet" href="../styles/immersiveEnvironment.css" />
 </head>
 <body>
+  <div class="immersive-environment environment-pulse"></div>
+
   <main class="session-shell">
+
     <section class="session-header">
       <div>
         <p class="eyebrow">Facilitator Command Center</p>
         <h1>Live Investigation Monitor</h1>
-        <p>Track active teams, progression stages, and discovery pacing.</p>
+        <p>
+          Monitor collaborative reasoning, contradiction emergence,
+          escalation pacing, and investigation destabilization.
+        </p>
       </div>
     </section>
 
-    <section id="live-session-grid" class="evidence-board-grid">
+    <section class="portal-card">
+      <p class="eyebrow">Active Teams</p>
+      <h2>Live Investigation Dynamics</h2>
+
+      <div
+        id="facilitator-live-monitor"
+        class="evidence-board-grid"
+      ></div>
     </section>
+
+    <section class="portal-card">
+      <p class="eyebrow">Environmental Escalation</p>
+      <h2>Atmospheric Control Panel</h2>
+
+      <div
+        id="facilitator-environmental-controls"
+        class="evidence-board-grid"
+      ></div>
+    </section>
+
+    <section class="portal-card">
+      <p class="eyebrow">Destabilization Controls</p>
+      <h2>Live Contradiction & Reinterpretation Triggers</h2>
+
+      <div class="evidence-board-grid">
+
+        <article class="participant-discovery-card">
+          <span>Facilitator Trigger</span>
+          <h3>Witness Memory Conflict</h3>
+          <p>
+            Introduce evidence suggesting a confident witness may have reconstructed events inaccurately.
+          </p>
+
+          <button
+            class="secondary-button"
+            onclick="window.triggerDestabilization('memory-conflict')"
+          >
+            Trigger Escalation
+          </button>
+        </article>
+
+        <article class="participant-discovery-card">
+          <span>Facilitator Trigger</span>
+          <h3>Timestamp Contradiction</h3>
+          <p>
+            Reveal timing evidence that destabilizes current investigative assumptions.
+          </p>
+
+          <button
+            class="secondary-button"
+            onclick="window.triggerDestabilization('timestamp-contradiction')"
+          >
+            Trigger Escalation
+          </button>
+        </article>
+
+        <article class="participant-discovery-card">
+          <span>Facilitator Trigger</span>
+          <h3>Overlooked Outreach Signal</h3>
+          <p>
+            Release overlooked communication evidence that reframes Jordan's emotional trajectory.
+          </p>
+
+          <button
+            class="secondary-button"
+            onclick="window.triggerDestabilization('overlooked-signal')"
+          >
+            Trigger Escalation
+          </button>
+        </article>
+
+      </div>
+    </section>
+
   </main>
 
-  <script type="module" src="../scripts/facilitatorMonitor.js"></script>
+  <script type="module" src="../scripts/facilitatorLiveMonitor.js"></script>
+  <script type="module" src="../scripts/facilitatorEnvironmentalPanel.js"></script>
+  <script type="module" src="../scripts/liveDestabilizationFeed.js"></script>
 </body>
 </html>

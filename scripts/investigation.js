@@ -13,6 +13,7 @@ import { startQrScanner } from '../engine/qrScanner.js';
 import { qrDiscoveryMap } from '../content/qr/qrDiscoveryMap.js';
 import { canAccessDiscovery } from '../engine/progressionLocks.js';
 import { getConnectedEvidence } from '../engine/evidenceConnections.js';
+import { getReinterpretationTrigger } from '../engine/reinterpretationEngine.js';
 import {
   initializeSessionTelemetry,
   updateSessionTelemetry
@@ -66,6 +67,18 @@ function renderEvidenceConnections(discoveryId) {
   });
 }
 
+function renderReinterpretation(discoveryId) {
+  const trigger = getReinterpretationTrigger(discoveryId);
+
+  if (!trigger) return;
+
+  renderFeedCard({
+    category: 'Reasoning Reassessment',
+    title: 'Interpretation Requires Revision',
+    content: trigger.message
+  });
+}
+
 function renderDiscovery(discovery) {
   if (!discoveryFeed || !discovery) return;
 
@@ -97,6 +110,7 @@ function renderDiscovery(discovery) {
   });
 
   renderEvidenceConnections(discovery.id);
+  renderReinterpretation(discovery.id);
 }
 
 function activateLiveInvestigationCard(teamName) {

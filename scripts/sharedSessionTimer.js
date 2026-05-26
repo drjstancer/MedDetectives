@@ -1,5 +1,6 @@
 const SESSION_TIMER_KEY = 'meddetectives-live-session-timer';
 const SESSION_TIMER_ACTIVE_KEY = 'meddetectives-live-session-active';
+const SESSION_ACCESS_CODE_KEY = 'meddetectives-live-session-code';
 
 let interval;
 
@@ -20,8 +21,21 @@ export function initializeSharedSessionTimer(displayElementId) {
 }
 
 export function activateSharedSession() {
+  const sessionCode = generateSessionCode();
+
   localStorage.setItem(SESSION_TIMER_KEY, Date.now().toString());
   localStorage.setItem(SESSION_TIMER_ACTIVE_KEY, 'true');
+  localStorage.setItem(SESSION_ACCESS_CODE_KEY, sessionCode);
+
+  return sessionCode;
+}
+
+export function getSharedSessionCode() {
+  return localStorage.getItem(SESSION_ACCESS_CODE_KEY) || '----';
+}
+
+function generateSessionCode() {
+  return Math.floor(1000 + Math.random() * 9000).toString();
 }
 
 function startInterval(display) {

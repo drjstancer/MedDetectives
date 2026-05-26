@@ -34,13 +34,7 @@
 
         <article class="participant-discovery-card">
           <span>Operations Manual</span>
-
           <h3>Facilitator Operations Guide</h3>
-
-          <p>
-            Room setup, escalation pacing, contradiction release guidance,
-            environmental modulation, and immersive orchestration support.
-          </p>
 
           <a
             class="primary-button"
@@ -53,13 +47,7 @@
 
         <article class="participant-discovery-card">
           <span>Language Support</span>
-
           <h3>Modular Facilitation Language Library</h3>
-
-          <p>
-            Narrative intervention prompts, contradiction language,
-            reflective redirects, and collaborative reasoning cues.
-          </p>
 
           <a
             class="primary-button"
@@ -72,13 +60,7 @@
 
         <article class="participant-discovery-card">
           <span>Printable Assets</span>
-
           <h3>Jordan Carter Evidence Packet</h3>
-
-          <p>
-            Printable evidence artifacts, witness materials, investigation documents,
-            and physical room resources.
-          </p>
 
           <a
             class="primary-button"
@@ -86,6 +68,19 @@
             target="_blank"
           >
             Open Evidence Packet
+          </a>
+        </article>
+
+        <article class="participant-discovery-card">
+          <span>QR Deployment</span>
+          <h3>QR Print Asset Package Guide</h3>
+
+          <a
+            class="primary-button"
+            href="../docs/qr-print-asset-package-guide.md"
+            target="_blank"
+          >
+            Open QR Guide
           </a>
         </article>
 
@@ -100,13 +95,7 @@
 
         <article class="participant-discovery-card">
           <span>Session Activation</span>
-
           <h3>Jordan Carter Investigation</h3>
-
-          <p>
-            Activate the room investigation, begin progression tracking,
-            and initialize escalation pacing.
-          </p>
 
           <button class="primary-button" id="activate-session-button">
             Activate Session
@@ -115,7 +104,6 @@
 
         <article class="participant-discovery-card">
           <span>Session Status</span>
-
           <h3>Live Investigation Timer</h3>
 
           <p id="session-timer-display">
@@ -129,7 +117,6 @@
 
         <article class="participant-discovery-card">
           <span>Stage Progression</span>
-
           <h3>Current Investigation Stage</h3>
 
           <p id="current-stage-display">
@@ -147,120 +134,9 @@
       </div>
     </section>
 
-    <section class="portal-card">
-      <p class="eyebrow">Active Teams</p>
-      <h2>Live Investigation Dynamics</h2>
-
-      <div
-        id="facilitator-live-monitor"
-        class="evidence-board-grid"
-      ></div>
-    </section>
-
-    <section class="portal-card">
-      <p class="eyebrow">Room Escalation</p>
-      <h2>Environmental Pacing Controls</h2>
-
-      <div
-        id="facilitator-environmental-controls"
-        class="evidence-board-grid"
-      ></div>
-    </section>
-
-    <section class="portal-card">
-      <p class="eyebrow">Environmental Transition Guidance</p>
-      <h2>Room-State Modulation</h2>
-
-      <div
-        id="live-room-state-panel"
-        class="evidence-board-grid"
-      ></div>
-    </section>
-
-    <section class="portal-card">
-      <p class="eyebrow">Audio Escalation</p>
-      <h2>Atmospheric Audio Guidance</h2>
-
-      <div
-        id="audio-escalation-panel"
-        class="evidence-board-grid"
-      ></div>
-    </section>
-
-    <section class="portal-card">
-      <p class="eyebrow">Facilitator Guidance</p>
-      <h2>Intervention Recommendations</h2>
-
-      <div
-        id="facilitator-intervention-panel"
-        class="evidence-board-grid"
-      ></div>
-    </section>
-
-    <section class="portal-card">
-      <p class="eyebrow">Destabilization Controls</p>
-      <h2>Release Contradictions Strategically</h2>
-
-      <div class="evidence-board-grid">
-
-        <article class="participant-discovery-card">
-          <span>Facilitator Trigger</span>
-          <h3>Witness Memory Conflict</h3>
-
-          <button
-            class="secondary-button"
-            onclick="window.triggerDestabilization?.('memory-conflict')"
-          >
-            Trigger Escalation
-          </button>
-        </article>
-
-        <article class="participant-discovery-card">
-          <span>Facilitator Trigger</span>
-          <h3>Timestamp Contradiction</h3>
-
-          <button
-            class="secondary-button"
-            onclick="window.triggerDestabilization?.('timestamp-contradiction')"
-          >
-            Trigger Escalation
-          </button>
-        </article>
-
-        <article class="participant-discovery-card">
-          <span>Facilitator Trigger</span>
-          <h3>Overlooked Outreach Signal</h3>
-
-          <button
-            class="secondary-button"
-            onclick="window.triggerDestabilization?.('overlooked-signal')"
-          >
-            Trigger Escalation
-          </button>
-        </article>
-
-      </div>
-    </section>
-
-    <section class="portal-card">
-      <p class="eyebrow">Debrief Export</p>
-      <h2>Collaborative Reasoning Synthesis</h2>
-
-      <div
-        id="debrief-export-panel"
-        class="evidence-board-grid"
-      ></div>
-    </section>
-
   </main>
 
   <script type="module" src="../scripts/facilitatorLiveMonitor.js"></script>
   <script type="module" src="../scripts/multiTeamMonitor.js"></script>
-  <script type="module" src="../scripts/facilitatorEnvironmentalPanel.js"></script>
-  <script type="module" src="../scripts/liveRoomStatePanel.js"></script>
-  <script type="module" src="../scripts/audioEscalationPanel.js"></script>
-  <script type="module" src="../scripts/facilitatorInterventionPanel.js"></script>
-  <script type="module" src="../scripts/liveDestabilizationFeed.js"></script>
-  <script type="module" src="../scripts/debriefExportPanel.js"></script>
 </body>
 </html>

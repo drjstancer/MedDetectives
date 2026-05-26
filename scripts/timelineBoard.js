@@ -1,19 +1,50 @@
-import { getTimelineEvents } from '../engine/timelineEngine.js';
+import { checkRoomTimeline, timelineRoomInstructions } from '../engine/timelineEngine.js';
 
 const timelineBoard = document.getElementById('timeline-board');
 
 export function renderTimelineBoard() {
   if (!timelineBoard) return;
 
-  const events = getTimelineEvents();
-
-  timelineBoard.innerHTML = events.map((event) => `
+  timelineBoard.innerHTML = `
     <article class="participant-discovery-card">
-      <span>${event.timestamp}</span>
-      <h3>${event.id}</h3>
-      <p>${event.summary}</p>
+      <span>Physical Room Challenge</span>
+      <h3>${timelineRoomInstructions.title}</h3>
+
+      <p>
+        ${timelineRoomInstructions.instruction}
+      </p>
+
+      <form id="timeline-check-form">
+        <input id="timeline-input" placeholder="Example: CARD-A,CARD-B,CARD-C" />
+
+        <button type="submit" class="secondary-button">
+          Validate Timeline Sequence
+        </button>
+      </form>
+
+      <div id="timeline-result"></div>
     </article>
-  `).join('');
+  `;
+
+  const form = document.getElementById('timeline-check-form');
+
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const input = document.getElementById('timeline-input');
+    const result = document.getElementById('timeline-result');
+
+    const submitted = input.value
+      .split(',')
+      .map((item) => item.trim())
+      .filter(Boolean);
+
+    const check = checkRoomTimeline(submitted);
+
+    result.innerHTML = `
+      <p>${check.message}</p>
+    `;
+  });
 }
 
 renderTimelineBoard();

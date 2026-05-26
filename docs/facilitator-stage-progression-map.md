@@ -29,6 +29,19 @@ Facilitators are modulating:
 - emotional tension,
 - and interpretive destabilization.
 
+Key discoveries should feel:
+- naturally uncovered,
+- emotionally meaningful,
+- collaboratively interpreted,
+- and strategically destabilizing.
+
+The goal is NOT revealing everything.
+
+The goal is controlling:
+- interpretive pressure,
+- collaborative uncertainty,
+- and emotional escalation.
+
 ---
 
 # STAGE 1 — Orientation & Initial Investigation
@@ -51,6 +64,26 @@ Participants should:
 - organize materials,
 - form early assumptions,
 - and identify initial tensions.
+
+---
+
+## Recommended Discoveries During This Stage
+
+Participants should primarily discover:
+- initial witness packets,
+- basic timeline fragments,
+- introductory observation cards,
+- visible evidence board materials,
+- and environmental clues.
+
+QR discoveries during this stage should:
+- reinforce curiosity,
+- deepen exploration,
+- and create subtle tension.
+
+Avoid major destabilization too early.
+
+Participants should still feel relatively confident in their early interpretations.
 
 ---
 
@@ -102,6 +135,27 @@ Participants should:
 
 ---
 
+## Recommended Discoveries During This Stage
+
+Participants should begin discovering:
+- emotionally conflicting witness statements,
+- hidden journal fragments,
+- QR reveals tied to emotional-context evidence,
+- and subtle timeline inconsistencies.
+
+Suggested reveals:
+- QR-01 Timeline Tension Discovery
+- early emotional masking journal fragments
+- contradictory observational details
+
+PIN systems should begin emerging during this stage but should NOT yet dominate participant focus.
+
+PIN discoveries should feel like:
+- investigative validation,
+- not puzzle progression.
+
+---
+
 ## Facilitator Focus
 
 Encourage:
@@ -143,6 +197,27 @@ Participants should:
 - challenge evidence reliability,
 - debate memory accuracy,
 - and negotiate competing interpretations.
+
+---
+
+## Recommended Discoveries During This Stage
+
+This is the primary stage for:
+- timeline reconstruction instability,
+- major QR reveals,
+- and collaborative reinterpretation.
+
+Suggested reveals:
+- QR-02 Witness Perspective Shift
+- Access PIN 4821
+- contradictory timeline evidence
+- observation inconsistencies
+- hidden witness reinterpretations
+
+Journal fragments should begin reshaping emotional interpretation significantly.
+
+Participants should begin recognizing:
+- confidence and accuracy are not always aligned.
 
 ---
 
@@ -191,6 +266,31 @@ Participants should:
 
 ---
 
+## Recommended Discoveries During This Stage
+
+This stage should contain:
+- the strongest destabilization reveals,
+- facilitator-controlled escalation discoveries,
+- and emotionally significant reinterpretations.
+
+Suggested reveals:
+- QR-03 Escalation Observation Discovery
+- Access PIN 7314
+- sealed contradiction envelopes
+- late-stage emotional-context evidence
+- facilitator-controlled reflective prompts
+
+Participants should feel:
+- emotionally unsettled,
+- interpretively unstable,
+- and collaboratively reflective.
+
+This stage is NOT about solving the investigation.
+
+It is about destabilizing certainty.
+
+---
+
 ## Facilitator Focus
 
 Sustain:
@@ -232,6 +332,23 @@ Participants should:
 - identify assumption changes,
 - reflect collaboratively,
 - and analyze reasoning journeys.
+
+---
+
+## Recommended Discoveries During This Stage
+
+No major evidence should emerge during this stage.
+
+Instead participants should:
+- revisit prior discoveries,
+- reinterpret earlier evidence,
+- and synthesize collaborative meaning.
+
+This stage should feel:
+- reflective,
+- emotionally grounded,
+- unresolved in meaningful ways,
+- and intellectually human.
 
 ---
 

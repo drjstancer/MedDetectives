@@ -1,8 +1,5 @@
-const SESSION_TIMER_KEY = 'meddetectives-live-session-timer';
-const SESSION_TIMER_ACTIVE_KEY = 'meddetectives-live-session-active';
-const SESSION_ACCESS_CODE_KEY = 'meddetectives-live-session-code';
-const SESSION_STAGE_KEY = 'meddetectives-live-session-stage';
 const SESSION_REGISTRY_KEY = 'meddetectives-live-session-registry';
+const ACTIVE_SESSION_KEY = 'meddetectives-active-session';
 
 const STAGES = [
   'orientation',
@@ -21,84 +18,6 @@ export function initializeSharedSessionTimer(displayElementId) {
 
   syncDisplay(display);
 
-  window.addEventListener('storage', () => {
-    syncDisplay(display);
-  });
-
-  if (localStorage.getItem(SESSION_TIMER_ACTIVE_KEY) === 'true') {
-    startInterval(display);
-  }
-}
-
-export function activateSharedSession() {
-  const sessionCode = generateSessionCode();
-
-  localStorage.setItem(SESSION_TIMER_KEY, Date.now().toString());
-  localStorage.setItem(SESSION_TIMER_ACTIVE_KEY, 'true');
-  localStorage.setItem(SESSION_ACCESS_CODE_KEY, sessionCode);
-  localStorage.setItem(SESSION_STAGE_KEY, STAGES[0]);
-
-  registerSession(sessionCode);
-
-  return sessionCode;
-}
-
-export function stopSharedSession() {
-  localStorage.setItem(SESSION_TIMER_ACTIVE_KEY, 'false');
-  clearInterval(interval);
-}
-
-export function resetSharedSession() {
-  localStorage.removeItem(SESSION_TIMER_KEY);
-  localStorage.removeItem(SESSION_TIMER_ACTIVE_KEY);
-  localStorage.removeItem(SESSION_ACCESS_CODE_KEY);
-  localStorage.removeItem(SESSION_STAGE_KEY);
-
-  clearInterval(interval);
-}
-
-export function advanceSharedSessionStage() {
-  const currentStage = localStorage.getItem(SESSION_STAGE_KEY) || STAGES[0];
-
-  const currentIndex = STAGES.indexOf(currentStage);
-  const nextIndex = Math.min(currentIndex + 1, STAGES.length - 1);
-
-  const nextStage = STAGES[nextIndex];
-
-  localStorage.setItem(SESSION_STAGE_KEY, nextStage);
-
-  return nextStage;
-}
-
-export function getCurrentSharedSessionStage() {
-  return localStorage.getItem(SESSION_STAGE_KEY) || STAGES[0];
-}
-
-export function getSharedSessionCode() {
-  return localStorage.getItem(SESSION_ACCESS_CODE_KEY) || '----';
-}
-
-export function getRegisteredSessions() {
-  return JSON.parse(localStorage.getItem(SESSION_REGISTRY_KEY) || '[]');
-}
-
-function registerSession(code) {
-  const existing = getRegisteredSessions();
-
-  existing.push({
-    code,
-    createdAt: new Date().toISOString(),
-    stage: STAGES[0]
-  });
-
-  localStorage.setItem(SESSION_REGISTRY_KEY, JSON.stringify(existing));
-}
-
-function generateSessionCode() {
-  return Math.floor(1000 + Math.random() * 9000).toString();
-}
-
-function startInterval(display) {
   clearInterval(interval);
 
   interval = setInterval(() => {
@@ -106,23 +25,131 @@ function startInterval(display) {
   }, 1000);
 }
 
-function syncDisplay(display) {
-  const startTime = Number(localStorage.getItem(SESSION_TIMER_KEY));
+export function activateSharedSession() {
+  const sessions = getRegisteredSessions();
 
-  if (!startTime) {
+  const session = {
+    code: generateSessionCode(),
+    startTime: Date.now(),
+    active: true,
+    stage: STAGES[0],
+    createdAt: new Date().toISOString()
+  };
+
+  sessions.push(session);
+
+  localStorage.setItem(SESSION_REGISTRY_KEY, JSON.stringify(sessions));
+  localStorage.setItem(ACTIVE_SESSION_KEY, session.code);
+
+  return session.code;
+}
+
+export function setActiveSession(code) {
+  localStorage.setItem(ACTIVE_SESSION_KEY, code);
+}
+
+export function getActiveSession() {
+  const activeCode = localStorage.getItem(ACTIVE_SESSION_KEY);
+
+  return getRegisteredSessions().find(
+    session => session.code === activeCode
+  ) || null;
+}
+
+export function stopSharedSession() {
+  mutateActiveSession(session => {
+    session.active = false;
+  });
+}
+
+export function resetSharedSession() {
+  const activeSession = getActiveSession();
+
+  if (!activeSession) return;
+
+  const remainingSessions = getRegisteredSessions().filter(
+    session => session.code !== activeSession.code
+  );
+
+  localStorage.setItem(
+    SESSION_REGISTRY_KEY,
+    JSON.stringify(remainingSessions)
+  );
+
+  if (remainingSessions.length) {
+    localStorage.setItem(
+      ACTIVE_SESSION_KEY,
+      remainingSessions[0].code
+    );
+  } else {
+    localStorage.removeItem(ACTIVE_SESSION_KEY);
+  }
+}
+
+export function advanceSharedSessionStage() {
+  let nextStage = STAGES[0];
+
+  mutateActiveSession(session => {
+    const currentIndex = STAGES.indexOf(session.stage);
+    const nextIndex = Math.min(currentIndex + 1, STAGES.length - 1);
+
+    session.stage = STAGES[nextIndex];
+    nextStage = session.stage;
+  });
+
+  return nextStage;
+}
+
+export function getCurrentSharedSessionStage() {
+  return getActiveSession()?.stage || STAGES[0];
+}
+
+export function getSharedSessionCode() {
+  return getActiveSession()?.code || '----';
+}
+
+export function getRegisteredSessions() {
+  return JSON.parse(
+    localStorage.getItem(SESSION_REGISTRY_KEY) || '[]'
+  );
+}
+
+function mutateActiveSession(mutator) {
+  const activeCode = localStorage.getItem(ACTIVE_SESSION_KEY);
+
+  const updatedSessions = getRegisteredSessions().map(session => {
+    if (session.code === activeCode) {
+      mutator(session);
+    }
+
+    return session;
+  });
+
+  localStorage.setItem(
+    SESSION_REGISTRY_KEY,
+    JSON.stringify(updatedSessions)
+  );
+}
+
+function generateSessionCode() {
+  return Math.floor(1000 + Math.random() * 9000).toString();
+}
+
+function syncDisplay(display) {
+  const activeSession = getActiveSession();
+
+  if (!activeSession || !activeSession.startTime) {
     display.textContent = '00:00:00';
     return;
   }
 
-  const elapsed = Math.floor((Date.now() - startTime) / 1000);
+  const elapsed = Math.floor(
+    (Date.now() - activeSession.startTime) / 1000
+  );
 
   const hours = String(Math.floor(elapsed / 3600)).padStart(2, '0');
   const minutes = String(Math.floor((elapsed % 3600) / 60)).padStart(2, '0');
   const seconds = String(elapsed % 60).padStart(2, '0');
 
   display.textContent = `${hours}:${minutes}:${seconds}`;
-
-  if (localStorage.getItem(SESSION_TIMER_ACTIVE_KEY) === 'true' && !interval) {
-    startInterval(display);
-  }
 }

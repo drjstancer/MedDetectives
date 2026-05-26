@@ -12,6 +12,7 @@ import { validateInvestigationPin } from '../engine/pinValidator.js';
 import { startQrScanner } from '../engine/qrScanner.js';
 import { qrDiscoveryMap } from '../content/qr/qrDiscoveryMap.js';
 import { canAccessDiscovery } from '../engine/progressionLocks.js';
+import { getConnectedEvidence } from '../engine/evidenceConnections.js';
 import {
   bindButtonAction,
   bindFormSubmission
@@ -35,6 +36,18 @@ function renderFeedCard({ category, title, content }) {
       <p>${content}</p>
     </article>
   `;
+}
+
+function renderEvidenceConnections(discoveryId) {
+  const connected = getConnectedEvidence(discoveryId);
+
+  if (!connected.length) return;
+
+  renderFeedCard({
+    category: 'Collaborative Synthesis',
+    title: 'Related Evidence Emerging',
+    content: `This artifact may connect to: ${connected.join(', ')}`
+  });
 }
 
 function renderDiscovery(discovery) {
@@ -62,6 +75,8 @@ function renderDiscovery(discovery) {
     title: discovery.title,
     content: discovery.content
   });
+
+  renderEvidenceConnections(discovery.id);
 }
 
 function activateLiveInvestigationCard(teamName) {

@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Facilitator Dashboard</title>
+  <title>Facilitator Command Center</title>
 
   <link rel="stylesheet" href="../styles/main.css" />
   <link rel="stylesheet" href="../styles/evidenceBoard.css" />
@@ -18,57 +18,110 @@
 
     <section class="session-header">
       <div>
-        <p class="eyebrow">Facilitator Dashboard</p>
-        <h1>MedDetectives Control Center</h1>
-        <p>Educational oversight and live intervention management.</p>
+        <p class="eyebrow">Facilitator Command Center</p>
+        <h1>Live Investigation Monitor</h1>
+        <p>
+          Guide the room. Watch reasoning patterns. Release pressure only when the investigation needs it.
+        </p>
       </div>
     </section>
 
     <section class="portal-card">
-      <p class="eyebrow">Live Sessions</p>
-      <h2>Active Investigation Teams</h2>
+      <p class="eyebrow">Active Teams</p>
+      <h2>Live Investigation Dynamics</h2>
+      <p>
+        Monitor team stage, confidence state, and unresolved contradictions without taking authority away from the room.
+      </p>
 
       <div
-        id="active-sessions-board"
+        id="facilitator-live-monitor"
         class="evidence-board-grid"
       ></div>
     </section>
 
     <section class="portal-card">
-      <p class="eyebrow">Educational Interventions</p>
-      <h2>Escalation Controls</h2>
+      <p class="eyebrow">Room Escalation</p>
+      <h2>Environmental Pacing Controls</h2>
+      <p>
+        Use these controls to shape tension, not to solve the case for students.
+      </p>
 
       <div
-        id="intervention-board"
+        id="facilitator-environmental-controls"
         class="evidence-board-grid"
       ></div>
     </section>
 
     <section class="portal-card">
-      <p class="eyebrow">Competency Tracking</p>
-      <h2>Learning Outcomes Monitoring</h2>
+      <p class="eyebrow">Destabilization Controls</p>
+      <h2>Release Contradictions Strategically</h2>
+      <p>
+        Trigger these only when a team needs new uncertainty, assumption disruption, or evidence-based redirection.
+      </p>
 
-      <div
-        id="competency-board"
-        class="evidence-board-grid"
-      ></div>
+      <div class="evidence-board-grid">
+
+        <article class="participant-discovery-card">
+          <span>Facilitator Trigger</span>
+          <h3>Witness Memory Conflict</h3>
+          <p>
+            Release evidence suggesting a confident witness may have reconstructed events inaccurately.
+          </p>
+
+          <button
+            class="secondary-button"
+            onclick="window.triggerDestabilization?.('memory-conflict')"
+          >
+            Trigger Escalation
+          </button>
+        </article>
+
+        <article class="participant-discovery-card">
+          <span>Facilitator Trigger</span>
+          <h3>Timestamp Contradiction</h3>
+          <p>
+            Reveal timing evidence that destabilizes the team's current sequence of events.
+          </p>
+
+          <button
+            class="secondary-button"
+            onclick="window.triggerDestabilization?.('timestamp-contradiction')"
+          >
+            Trigger Escalation
+          </button>
+        </article>
+
+        <article class="participant-discovery-card">
+          <span>Facilitator Trigger</span>
+          <h3>Overlooked Outreach Signal</h3>
+          <p>
+            Release overlooked communication evidence that reframes Jordan's emotional trajectory.
+          </p>
+
+          <button
+            class="secondary-button"
+            onclick="window.triggerDestabilization?.('overlooked-signal')"
+          >
+            Trigger Escalation
+          </button>
+        </article>
+
+      </div>
     </section>
 
     <section class="portal-card">
-      <p class="eyebrow">Reflection Feed</p>
-      <h2>Participant Debrief Data</h2>
-
-      <div
-        id="reflection-board"
-        class="evidence-board-grid"
-      ></div>
+      <p class="eyebrow">Facilitator Guardrail</p>
+      <h2>Do Not Over-Facilitate</h2>
+      <p>
+        The physical room remains the authority. Use the digital layer to pace, validate, destabilize, and support reflection.
+        Do not explain the case, diagnose Jordan, or rescue teams from productive uncertainty.
+      </p>
     </section>
 
   </main>
 
-  <script
-    type="module"
-    src="../scripts/facilitatorDashboard.js"
-  ></script>
+  <script type="module" src="../scripts/facilitatorLiveMonitor.js"></script>
+  <script type="module" src="../scripts/facilitatorEnvironmentalPanel.js"></script>
+  <script type="module" src="../scripts/liveDestabilizationFeed.js"></script>
 </body>
 </html>

@@ -3,9 +3,14 @@ import { subscribe } from '../engine/eventBus.js';
 import {
   activateParticipantSession,
   formatRemainingTime,
-  getRemainingMilliseconds,
   markForfeit
 } from '../engine/sessionRuntime.js';
+import {
+  bindParticipantToSession,
+  getParticipantStage,
+  getParticipantTimerMilliseconds,
+  isParticipantSessionActive
+} from '../engine/liveSessionSync.js';
 import { ProgressionMap } from '../engine/progressionMap.js';
 import { getDiscoveryById } from '../engine/discoveryRegistry.js';
 import { validateInvestigationPin } from '../engine/pinValidator.js';
@@ -32,6 +37,7 @@ const activationStatus = document.getElementById('activation-status');
 const activationTeamName = document.getElementById('activation-team-name');
 const qrVideo = document.getElementById('qr-video');
 const qrShell = document.getElementById('qr-scanner-shell');
+
 let timerLoop = null;
 let activeSessionCode = null;
 
@@ -51,32 +57,8 @@ function syncTelemetry() {
   const state = getState();
 
   updateSessionTelemetry(activeSessionCode, {
-    currentStage: state.currentStage,
+    currentStage: getParticipantStage(),
     discoveries: state.discoveries || []
-  });
-}
-
-function renderEvidenceConnections(discoveryId) {
-  const connected = getConnectedEvidence(discoveryId);
-
-  if (!connected.length) return;
-
-  renderFeedCard({
-    category: 'Collaborative Synthesis',
-    title: 'Related Evidence Emerging',
-    content: `This artifact may connect to: ${connected.join(', ')}`
-  });
-}
-
-function renderReinterpretation(discoveryId) {
-  const trigger = getReinterpretationTrigger(discoveryId);
-
-  if (!trigger) return;
-
-  renderFeedCard({
-    category: 'Reasoning Reassessment',
-    title: 'Interpretation Requires Revision',
-    content: trigger.message
   });
 }
 
@@ -96,10 +78,8 @@ function renderDiscovery(discovery) {
     return;
   }
 
-  const updatedDiscoveries = [...discoveries, discovery.id];
-
   updateState({
-    discoveries: updatedDiscoveries
+    discoveries: [...discoveries, discovery.id]
   });
 
   syncTelemetry();
@@ -109,9 +89,6 @@ function renderDiscovery(discovery) {
     title: discovery.title,
     content: discovery.content
   });
-
-  renderEvidenceConnections(discovery.id);
-  renderReinterpretation(discovery.id);
 }
 
 function activateLiveInvestigationCard(teamName) {
@@ -120,7 +97,7 @@ function activateLiveInvestigationCard(teamName) {
   activationCard.classList.add('live');
 
   if (activationStatus) {
-    activationStatus.textContent = 'INVESTIGATION ACTIVE';
+    activationStatus.textContent = 'LIVE INVESTIGATION ACTIVE';
   }
 
   if (activationTeamName) {
@@ -131,78 +108,24 @@ function activateLiveInvestigationCard(teamName) {
 function updateTimer() {
   if (!timerElement) return;
 
-  const remaining = getRemainingMilliseconds();
-
-  timerElement.textContent = formatRemainingTime(remaining);
-
-  if (remaining <= 0) {
-    timerElement.textContent = '00:00';
-    markForfeit('Time expired before scenario completion.');
-    clearInterval(timerLoop);
+  if (!isParticipantSessionActive()) {
+    timerElement.textContent = 'SESSION PAUSED';
+    return;
   }
+
+  const elapsed = getParticipantTimerMilliseconds();
+
+  timerElement.textContent = formatRemainingTime(
+    Math.max(0, 3600000 - elapsed)
+  );
 }
 
 function startTimerLoop() {
   clearInterval(timerLoop);
+
   updateTimer();
+
   timerLoop = setInterval(updateTimer, 1000);
-}
-
-function completeScenario() {
-  updateState({
-    sessionStatus: 'completed'
-  });
-
-  syncTelemetry();
-
-  if (completionPanel) {
-    completionPanel.style.display = 'block';
-  }
-}
-
-function advanceScenarioStage() {
-  const state = getState();
-  const currentStage = state.currentStage || 'stage-01-activation';
-  const progression = ProgressionMap[currentStage];
-
-  if (!progression) return;
-
-  const discoveries = state.discoveries || [];
-
-  const ready = (progression.requiredDiscoveries || []).every((required) =>
-    discoveries.includes(required)
-  );
-
-  if (!ready) {
-    const insufficient = getInsufficientEvidenceMessage(currentStage);
-
-    renderFeedCard({
-      category: 'Clinical Uncertainty',
-      title: 'Insufficient Evidence',
-      content: insufficient?.message || 'Your team requires additional evidence before drawing conclusions.'
-    });
-
-    return;
-  }
-
-  if (!progression.unlocks.length) {
-    completeScenario();
-    return;
-  }
-
-  const nextStage = progression.unlocks[0];
-
-  updateState({
-    currentStage: nextStage
-  });
-
-  syncTelemetry();
-
-  renderFeedCard({
-    category: 'Stage Progression',
-    title: 'New Investigation Phase',
-    content: nextStage
-  });
 }
 
 bindFormSubmission('#activation-form', (event) => {
@@ -213,6 +136,13 @@ bindFormSubmission('#activation-form', (event) => {
 
   const teamName = teamNameInput.value;
   const sessionCode = sessionCodeInput.value;
+
+  const session = bindParticipantToSession(sessionCode);
+
+  if (!session) {
+    activationStatus.textContent = 'INVALID SESSION CODE';
+    return;
+  }
 
   activeSessionCode = sessionCode;
 
@@ -227,7 +157,7 @@ bindFormSubmission('#activation-form', (event) => {
   });
 
   updateState({
-    currentStage: 'stage-01-activation',
+    currentStage: session.stage,
     discoveries: []
   });
 
@@ -237,6 +167,7 @@ bindFormSubmission('#activation-form', (event) => {
   sessionCodeInput.setAttribute('disabled', true);
 
   activateLiveInvestigationCard(teamName);
+
   startTimerLoop();
 });
 
@@ -248,7 +179,7 @@ bindButtonAction('#scan-qr-btn', async () => {
   await startQrScanner({
     videoElement: qrVideo,
     onDiscovery: (value) => {
-      const currentStage = getState().currentStage;
+      const currentStage = getParticipantStage();
 
       const allowed = canAccessDiscovery({
         currentStage,
@@ -259,12 +190,8 @@ bindButtonAction('#scan-qr-btn', async () => {
         renderFeedCard({
           category: 'Locked Evidence',
           title: 'Discovery Not Yet Available',
-          content: 'Your team has not progressed far enough to interpret this artifact.'
+          content: 'Your investigation has not progressed far enough to interpret this artifact.'
         });
-
-        if (qrShell) {
-          qrShell.style.display = 'none';
-        }
 
         return;
       }
@@ -276,21 +203,13 @@ bindButtonAction('#scan-qr-btn', async () => {
         renderFeedCard({
           category: 'Scan Error',
           title: 'Unknown Artifact',
-          content: 'The scanned QR code does not match an investigation artifact.'
+          content: 'The scanned evidence does not match a registered investigation artifact.'
         });
-
-        if (qrShell) {
-          qrShell.style.display = 'none';
-        }
 
         return;
       }
 
       renderDiscovery(discovery);
-
-      if (qrShell) {
-        qrShell.style.display = 'none';
-      }
     }
   });
 });
@@ -302,7 +221,7 @@ bindButtonAction('#pin-submit-btn', () => {
   if (!result.valid) {
     renderFeedCard({
       category: 'Access PIN',
-      title: 'Evidence Still Incomplete',
+      title: 'Evidence Access Denied',
       content: result.message
     });
 
@@ -313,11 +232,6 @@ bindButtonAction('#pin-submit-btn', () => {
   renderDiscovery(discovery);
 });
 
-bindButtonAction('#reasoning-btn', (event) => {
-  event.preventDefault();
-  advanceScenarioStage();
-});
-
 window.addEventListener('visibilitychange', () => {
   if (document.hidden) {
     markForfeit('Participant session left active investigation screen.');
@@ -325,5 +239,3 @@ window.addEventListener('visibilitychange', () => {
 });
 
 updateTimer();
-
-console.log('investigation', getState());

@@ -14,6 +14,7 @@ import { qrDiscoveryMap } from '../content/qr/qrDiscoveryMap.js';
 import { canAccessDiscovery } from '../engine/progressionLocks.js';
 import { getConnectedEvidence } from '../engine/evidenceConnections.js';
 import { getReinterpretationTrigger } from '../engine/reinterpretationEngine.js';
+import { getInsufficientEvidenceMessage } from '../engine/insufficientEvidenceEngine.js';
 import {
   initializeSessionTelemetry,
   updateSessionTelemetry
@@ -173,10 +174,12 @@ function advanceScenarioStage() {
   );
 
   if (!ready) {
+    const insufficient = getInsufficientEvidenceMessage(currentStage);
+
     renderFeedCard({
-      category: 'Reasoning Checkpoint',
-      title: 'Additional Evidence Required',
-      content: 'Your team must locate more physical evidence before progressing.'
+      category: 'Clinical Uncertainty',
+      title: 'Insufficient Evidence',
+      content: insufficient?.message || 'Your team requires additional evidence before drawing conclusions.'
     });
 
     return;

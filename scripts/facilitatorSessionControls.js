@@ -12,6 +12,12 @@ import {
   getActiveSession
 } from './sharedSessionTimer.js';
 
+import {
+  broadcastSessionUpdate,
+  broadcastStageUpdate,
+  broadcastFacilitatorIntervention
+} from '../services/realtimeSessionService.js';
+
 const activateButton = document.getElementById('activate-session-button');
 const stopButton = document.getElementById('stop-session-button');
 const resumeButton = document.getElementById('resume-session-button');
@@ -69,29 +75,60 @@ function syncDashboardState() {
   }
 }
 
+async function broadcastCurrentSessionState(interventionType = 'session-update') {
+  const activeSession = getActiveSession();
+
+  if (!activeSession) return;
+
+  await broadcastSessionUpdate(activeSession.code, activeSession);
+
+  await broadcastStageUpdate(activeSession.code, {
+    code: activeSession.code,
+    stage: activeSession.stage,
+    active: activeSession.active
+  });
+
+  await broadcastFacilitatorIntervention(activeSession.code, {
+    code: activeSession.code,
+    interventionType,
+    timestamp: new Date().toISOString(),
+    stage: activeSession.stage
+  });
+}
+
 syncDashboardState();
 
-activateButton?.addEventListener('click', () => {
+activateButton?.addEventListener('click', async () => {
   activateSharedSession();
   syncDashboardState();
+
+  await broadcastCurrentSessionState('session-activated');
 });
 
-stopButton?.addEventListener('click', () => {
+stopButton?.addEventListener('click', async () => {
   stopSharedSession();
   syncDashboardState();
+
+  await broadcastCurrentSessionState('session-paused');
 });
 
-resumeButton?.addEventListener('click', () => {
+resumeButton?.addEventListener('click', async () => {
   resumeSharedSession();
   syncDashboardState();
+
+  await broadcastCurrentSessionState('session-resumed');
 });
 
-resetButton?.addEventListener('click', () => {
+resetButton?.addEventListener('click', async () => {
   resetSharedSession();
   syncDashboardState();
+
+  await broadcastCurrentSessionState('session-reset');
 });
 
-advanceButton?.addEventListener('click', () => {
+advanceButton?.addEventListener('click', async () => {
   advanceSharedSessionStage();
   syncDashboardState();
+
+  await broadcastCurrentSessionState('stage-advanced');
 });

@@ -169,10 +169,53 @@
       </div>
     </section>
 
+    <section class="portal-card">
+      <p class="eyebrow">Operational Awareness</p>
+      <h2>Quiet Facilitation Support</h2>
+      <p>
+        This area supports continuity and pacing awareness. The physical room remains the authority.
+      </p>
+
+      <div class="evidence-board-grid">
+        <article class="participant-discovery-card">
+          <span>Continuity</span>
+          <h3 id="continuity-status-display">Awaiting Session</h3>
+          <p id="continuity-recommendation-display">
+            Activate a session to begin quiet operational monitoring.
+          </p>
+        </article>
+
+        <article class="participant-discovery-card">
+          <span>Synchronization</span>
+          <h3 id="synchronization-status-display">Not Evaluated</h3>
+          <p>
+            Synchronization warnings should guide facilitator judgment, not replace it.
+          </p>
+        </article>
+
+        <article class="participant-discovery-card">
+          <span>Interpretive Movement</span>
+          <h3 id="escalation-readiness-display">Facilitator Judgment Required</h3>
+          <p>
+            Escalation readiness is interpretive. The system never advances the room automatically.
+          </p>
+        </article>
+
+        <article class="participant-discovery-card">
+          <span>Facilitator Notes</span>
+          <h3>Recommended Attention</h3>
+          <div id="facilitator-recommendations-display">
+            No recommendations yet.
+          </div>
+        </article>
+      </div>
+    </section>
+
   </main>
 
   <script type="module" src="../scripts/facilitatorSessionControls.js"></script>
   <script type="module" src="../scripts/facilitatorLiveMonitor.js"></script>
   <script type="module" src="../scripts/multiTeamMonitor.js"></script>
+  <script type="module" src="../scripts/facilitatorOperationalAwareness.js"></script>
 </body>
 </html>
